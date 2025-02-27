@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace The_Glamour.Controllers
@@ -7,6 +7,7 @@ namespace The_Glamour.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
         }
     }

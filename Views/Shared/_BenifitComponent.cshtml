@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<div id="Benefit" style="background-color: #d3d3d3; padding: 70px; display: flex; flex-direction: column; align-items: center;">
+    <!-- Centered Heading -->
+    <h2 class="services-title display-4 font-weight-bold mb-4" style="text-align: center;">
+        Benefits you will get
+    </h2>
+
+    <div class="benefit-content" style="max-width: 1000px; display: flex; align-items: center; justify-content: space-between; gap: 70px;">
+        <!-- Text Section -->
+        <div style="flex: 1;">
+            <p style="text-align: justify; font-size: 20px; line-height: 1.6; font-family: 'Kaisei HarunoUmi';">
+                Experience the convenience of booking salon appointments online, anytime and anywhere. Our easy-to-use booking system lets you select your desired services, choose a time slot that suits you, and receive instant confirmation—all without needing to call. Automated reminders help reduce no-shows, while our system ensures efficient management of staff schedules and resources.
+
+                Whether you're booking for yourself or a group, our platform is designed to enhance your salon experience, making it faster, more flexible, and personalized for your needs. Enjoy seamless scheduling, secure online payments, and exclusive discounts for members. Our advanced system also allows you to track past appointments, reschedule with ease, and receive tailored recommendations based on your preferences.
+            </p>
+            <a href="@Url.Action("AppointmentForm", "Home")">
+                <button style="padding: 10px 20px; background-color: #6b5b6b; color: white; border: none; cursor: pointer; font-family: 'Kaisei HarunoUmi';">
+                    Book Appointment
+                </button>
+            </a>
+        </div>
+
+        <!-- Image Section -->
+        <div style="flex: 1; display: flex; justify-content: flex-end;">
+            <img src="~/images/download (5) 2.png" alt="Salon Service" style="width: 100%; max-width: 400px;" />
+        </div>
+    </div>
+</div>
+<div class="w-100 bg-black" style="height: 10px;"></div>
