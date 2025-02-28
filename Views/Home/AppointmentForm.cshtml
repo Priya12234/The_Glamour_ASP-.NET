@@ -1,0 +1,95 @@
+﻿
+
+@{
+    ViewData["Title"] = "Book Your Appointment";
+}
+
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+
+<div class="appointment-container-fluid p-5" style="position: relative;">
+    <!-- Back Arrow -->
+    <a href="@Url.Action("Index", "Home")" class="appointment-back-arrow" style="position: absolute; top: 20px; left: 20px; font-size: 24px; color: #35262E; cursor: pointer;">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <div class="appointment-container p-3 p-md-5" style="font-family: 'Kaisei HarunoUmi', serif; color: white;">
+        <div class="appointment-row w-100 align-items-center">
+            <!-- Left Section: Illustration -->
+            <div class="col-md-6 text-center">
+                <img src="~/images/bro1.png" alt="Salon Illustration" class="appointment-img-fluid" />
+            </div>
+
+            <!-- Right Section: Form -->
+            <div class="appointment-right-section col-md-6 mx-auto" style="background: #6b5b6b;">
+                <form class="p-4 shadow-lg rounded" method="post" action="@Url.Action("Book", "Appointment")">
+                    <h2 class="text-center">Book Your Appointment</h2>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label class="appointment-form-label" for="Email">Email:</label>
+                        <input type="email" id="Email" name="Email" class="appointment-form-control" required />
+                    </div>
+
+                    <!-- Full Name -->
+                    <div class="mb-3">
+                        <label class="appointment-form-label" for="FullName">Full Name:</label>
+                        <input type="text" id="FullName" name="FullName" class="appointment-form-control" required />
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="mb-3">
+                        <label class="appointment-form-label" for="PhoneNumber">Phone Number:</label>
+                        <input type="tel" id="PhoneNumber" name="PhoneNumber" class="appointment-form-control" required />
+                    </div>
+
+                    <!-- Service Selection -->
+                    <div class="mb-3">
+                        <label class="appointment-form-label" for="Service">Service You Would Like to Book:</label>
+                        <select id="Service" name="Service" class="appointment-form-select" required>
+                            <option value="">Select a service</option>
+                            <option value="makeup">Makeup</option>
+                            <option value="haircut">Haircut</option>
+                            <option value="massage">Massage</option>
+                        </select>
+                    </div>
+
+                    <!-- Appointment Date -->
+                    <div class="mb-3">
+                        <label class="appointment-form-label" for="Date">Preferred Appointment Date:</label>
+                        <input type="date" id="Date" name="Date" class="appointment-form-control" required />
+                    </div>
+
+                    <!-- Appointment Time -->
+                    <div class="mb-3">
+                        <label class="appointment-form-label">Preferred Appointment Time:</label>
+                        <div class="appointment-time-row">
+                            <input type="number" name="Hours" class="appointment-form-control" min="1" max="12" required placeholder="HH" />
+                            <span class="appointment-time-separator">:</span>
+                            <input type="number" name="Minutes" class="appointment-form-control" min="0" max="59" required placeholder="MM" />
+                            <select name="AmPm" class="appointment-form-select">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!-- Other Details -->
+                    <div class="mb-3">
+                        <label class="appointment-form-label" for="Details">Other Details:</label>
+                        <textarea id="Details" name="Details" class="appointment-form-control" rows="3"></textarea>
+                    </div>
+
+                    <!-- Payment Information -->
+                    <div class="mb-3">
+                        <label class="appointment-form-label fw-bold">Your Total Payment is: $<span id="TotalPayment">0</span></label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="appointment-btn appointment-btn-light appointment-w-100 appointment-fw-bold">Pay Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

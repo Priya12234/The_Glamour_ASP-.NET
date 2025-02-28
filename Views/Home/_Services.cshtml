@@ -86,9 +86,7 @@
 
     <!-- Book Appointment Button -->
     <div class="d-flex justify-content-start mt-4" style="padding-left: 200px;">
-        <a href="@Url.Action("AppointmentForm", "Home")">
-            <button class="btn book-appointment-btn-custom">Book Appointment</button>
-        </a>
+        <a asp-controller="Home" asp-action="AppointmentForm" class="btn book-appointment-btn-custom">Book Appointment</a>
     </div>
 </div>
 <div class="w-100 bg-dark" style="height: 10px;"></div>

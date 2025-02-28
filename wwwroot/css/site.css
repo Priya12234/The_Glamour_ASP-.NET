@@ -100,4 +100,108 @@
         gap: 20px;
     }
 }
-  
+
+/* Appointment Form */
+
+/* General Styles */
+body {
+    font-family: 'Kaisei HarunoUmi';
+}
+
+.appointment-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Section: Image */
+.appointment-left-section {
+    background-color: #ffffff !important;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .appointment-left-section img {
+        width: 80%;
+        height: auto;
+        object-fit: contain;
+    }
+
+/* Right Section: Form */
+.appointment-right-section {
+    background-color: #786670; /* Updated background color */
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+    /* Form Styles */
+    .appointment-right-section form {
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        padding: 2rem;
+    }
+
+    .appointment-right-section h2 {
+        text-align: center;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+    }
+
+    .appointment-right-section form label {
+        font-size: 20px;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+    }
+
+    .appointment-right-section form input,
+    .appointment-right-section form select,
+    .appointment-right-section form textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 0.7rem;
+    }
+
+/* Time Input Fields */
+.appointment-time-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing between elements */
+}
+
+.appointment-time-separator {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.appointment-form-control,
+.appointment-form-select {
+    width: 60px; /* Adjust width for better alignment */
+    padding: 8px;
+}
+
+
+/* Submit Button */
+.appointment-right-section form button {
+    font-family: 'Kaisei HarunoUmi', sans-serif;
+    margin: 20px auto;
+    padding: 15px;
+    width: auto;
+    display: block;
+    color: #a584a5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .appointment-right-section form button:hover {
+        background-color: #d3c4d3;
+    }
