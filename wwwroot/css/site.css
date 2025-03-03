@@ -191,3 +191,60 @@ body {
     .appointment-right-section form button:hover {
         background-color: #d3c4d3;
     }
+
+/* Login form */
+/* Login Container */
+.login-container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Login Back Arrow */
+.login-back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Login Card */
+.login-card {
+    background-color: #786670;
+    color: black;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    min-height: 50vh; /* Adjust for better responsiveness */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Login Form Input Fields */
+.login-form-control {
+    font-size: 16px;
+    font-family: 'Kaisei HarunoUmi', serif;
+    padding: 0.7rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Login Button */
+.login-btn {
+    font-size: 16px;
+    padding: 0.7rem;
+    border-radius: 5px;
+    background-color: white;
+}
+
+/* Login Register Link */
+.login-text-center a {
+    text-decoration: underline;
+    color: black;
+    font-size: 16px;
+}
