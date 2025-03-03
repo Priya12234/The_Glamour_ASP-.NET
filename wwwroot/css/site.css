@@ -113,20 +113,6 @@ body {
     height: 100vh;
 }
 
-/* Left Section: Image */
-.appointment-left-section {
-    background-color: #ffffff !important;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-    .appointment-left-section img {
-        width: 80%;
-        height: auto;
-        object-fit: contain;
-    }
 
 /* Right Section: Form */
 .appointment-right-section {

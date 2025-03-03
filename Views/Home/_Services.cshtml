@@ -1,76 +1,41 @@
-﻿<div id="services" class="services-container text-center py-5">
+﻿@{
+    var services = new[]
+    {
+        new { Image = "Makeup.jpg", Title = "Occasional Makeup", Description = "Our talented team of professional makeup artists specializes in creating stunning looks for every occasion." },
+        new { Image = "Hairstyle1.jpg", Title = "Hairstyle", Description = "Our skilled hairstylists specialize in crafting beautiful, personalized looks for any occasion." },
+        new { Image = "facial2.jpg", Title = "Facial", Description = "Experience rejuvenation with facials that cleanse, nourish, and bring out your skin’s natural radiance." },
+        new { Image = "Bride.jpg", Title = "Bridal Makeup", Description = "Enhance your bridal glow with makeup that highlights your beauty, lasts all day, and creates a timeless, elegant look." },
+        new { Image = "Nail.png", Title = "NailArt", Description = "Elevate your style with nail art that adds a touch of elegance, creativity, and flawless detail to every look." },
+        new { Image = "Haircut.jpg", Title = "Haircut", Description = "Transform your look with a haircut that perfectly suits your style, adding freshness and confidence to your appearance." },
+        new { Image = "Spa.jpg", Title = "Spa", Description = "Enjoy a relaxing spa experience that refreshes your body, calms your mind, and makes you feel great." },
+        new { Image = "Mehndi.jpg", Title = "Mehndi", Description = "Adorn your hands with beautiful mehndi designs that add charm to every special occasion." },
+    };
+}
+
+<div id="services" class="services-container text-center py-5">
     <h2 class="services-title display-4 font-weight-bold mb-4">What We Provide</h2>
 
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <!-- First Carousel Slide -->
-            <div class="carousel-item active">
-                <div class="d-flex justify-content-center align-items-center flex-wrap card-container py-3">
-                    <div class="card card-custom text-decoration-none">
-                        <img src="~/images/Makeup.jpg" class="card-img-top card-img-custom" alt="Makeup" />
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h3 class="card-title">Makeup</h3>
-                            <p class="card-text">
-                                Our talented team of professional makeup artists specializes in creating stunning looks for every occasion.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card card-custom text-decoration-none">
-                        <img src="~/images/Hairstyle1.jpg" class="card-img-top card-img-custom" alt="Hairstyle" />
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h3 class="card-title">Hairstyle</h3>
-                            <p class="card-text">
-                                Our skilled hairstylists specialize in crafting beautiful, personalized looks for any occasion.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card card-custom text-decoration-none">
-                        <img src="~/images/facial2.jpg" class="card-img-top card-img-custom" alt="Facial" />
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h3 class="card-title">Facial</h3>
-                            <p class="card-text">
-                                Experience rejuvenation with facials that cleanse, nourish, and bring out your skin’s natural radiance.
-                            </p>
-                        </div>
+            @for (var i = 0; i < services.Length; i += 3)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                    <div class="d-flex justify-content-center align-items-center flex-wrap card-container py-3">
+                        @for (var j = i; j < i + 3 && j < services.Length; j++)
+                        {
+                            var service = services[j];
+                            var imagePath = Url.Content("~/images/" + service.Image);
+                            <div class="card card-custom text-decoration-none">
+                                <img src="@imagePath" class="card-img-top card-img-custom" alt="@service.Title" />
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <h3 class="card-title">@service.Title</h3>
+                                    <p class="card-text">@service.Description</p>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
-            </div>
-            <!--Second Slide-->
-            <div class="carousel-item active">
-                <div class="d-flex justify-content-center align-items-center flex-wrap card-container py-3">
-                    <div class="card card-custom text-decoration-none">
-                        <img src="~/images/Makeup.jpg" class="card-img-top card-img-custom" alt="Makeup" />
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h3 class="card-title">Makeup</h3>
-                            <p class="card-text">
-                                Our talented team of professional makeup artists specializes in creating stunning looks for every occasion.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card card-custom text-decoration-none">
-                        <img src="~/images/Hairstyle1.jpg" class="card-img-top card-img-custom" alt="Hairstyle" />
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h3 class="card-title">Hairstyle</h3>
-                            <p class="card-text">
-                                Our skilled hairstylists specialize in crafting beautiful, personalized looks for any occasion.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card card-custom text-decoration-none">
-                        <img src="~/images/facial2.jpg" class="card-img-top card-img-custom" alt="Facial" />
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h3 class="card-title">Facial</h3>
-                            <p class="card-text">
-                                Experience rejuvenation with facials that cleanse, nourish, and bring out your skin’s natural radiance.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
 
         <!-- Carousel Controls -->
