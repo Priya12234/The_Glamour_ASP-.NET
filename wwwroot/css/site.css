@@ -193,6 +193,7 @@ body {
     }
 
 /* Login form */
+
 /* Login Container */
 .login-container-fluid {
     display: flex;
@@ -204,12 +205,13 @@ body {
 
 /* Login Back Arrow */
 .login-back-arrow {
-    position: absolute;
+    position: relative;
     top: 20px;
     left: 20px;
-    cursor: pointer;
     font-size: 24px;
-    color: #333;
+    cursor: pointer;
+    color: #333; /* Change color if needed */
+    z-index: 10;
 }
 
 /* Login Card */
