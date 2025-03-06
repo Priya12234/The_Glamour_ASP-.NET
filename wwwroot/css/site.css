@@ -205,12 +205,12 @@ body {
 
 /* Login Back Arrow */
 .login-back-arrow {
-    position: relative;
-    top: 20px;
-    left: 20px;
+    position: absolute; /* Change to absolute positioning */
+    top: 20px; /* Adjust the distance from the top */
+    left: 20px; /* Adjust the distance from the left */
     font-size: 24px;
     cursor: pointer;
-    color: #333; /* Change color if needed */
+    color: black; /* Change color if needed */
     z-index: 10;
 }
 
@@ -249,4 +249,46 @@ body {
     text-decoration: underline;
     color: black;
     font-size: 16px;
+}
+
+/* Register Form */
+
+.register-back-arrow {
+    position: absolute; /* Change to absolute positioning */
+    top: 20px; /* Adjust the distance from the top */
+    left: 20px; /* Adjust the distance from the left */
+    font-size: 24px;
+    cursor: pointer;
+    color: black; /* Change color if needed */
+    z-index: 10;
+}
+
+.register-illustration {
+    max-width: 100%;
+    height: auto;
+}
+
+.register-card-container {
+    max-width: 500px;
+    width: 100%;
+    background-color : #6b5b6b;
+    color: white;
+}
+
+.register-btn-custom {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.register-text-center {
+    text-align: center;
+    color: white;
+}
+
+.register-text-center a {
+        color: white;
+    text-decoration: underline;
 }

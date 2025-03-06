@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "RegisterForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+<div class="container d-flex justify-content-center align-items-center vh-100 position-relative">
+    <!-- Back Arrow -->
+    <a href="/" class="register-back-arrow">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+
+    <div class="row w-100 justify-content-center">
+        <!-- Left Section: Illustration -->
+        <div class="col-md-6 d-flex justify-content-center align-items-center order-md-1 order-0">
+            <img src="/images/pana.png" alt="Salon Illustration" class="img-fluid register-illustration" />
+        </div>
+
+        <!-- Right Section: Registration Form -->
+        <div class="col-md-6 d-flex justify-content-center align-items-center order-md-2 order-1">
+            <div class="card register-card-container shadow p-4 w-100">
+                <h2 class="register-text-center">Register Yourself</h2>
+                <form method="post" action="/Home/Register">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirm-password" class="form-label">Confirm Password:</label>
+                        <input type="password" class="form-control" id="confirm-password" name="confirmPassword" required />
+                    </div>
+
+                    <div class="register-text-center">
+                        <button type="submit" class="btn register-btn-custom">Register</button>
+                    </div>
+
+                    <p class="register-text-center mt-3">
+                        Already have an account? <a href="/Home/LogIn">LogIn</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

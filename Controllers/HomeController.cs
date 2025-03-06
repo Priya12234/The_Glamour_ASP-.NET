@@ -19,5 +19,10 @@ namespace The_Glamour.Controllers
         {
             return View();
         }
+
+        public IActionResult RegisterForm()
+        {
+            return View();
+        }
     }
 }
