@@ -103,16 +103,32 @@
 
 /* Appointment Form */
 
-/* General Styles */
 body {
-    font-family: 'Kaisei HarunoUmi';
+    font-family: 'Kaisei HarunoUmi', serif;
 }
 
-.appointment-container {
+/* Back Arrow */
+.appointment-back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: #35262E;
+    cursor: pointer;
+}
+
+/* Left Section: Image */
+.appointment-left-section {
+    background-color: #ffffff !important;
+    flex: 1;
     display: flex;
-    height: 100vh;
 }
 
+    .appointment-left-section img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
 
 /* Right Section: Form */
 .appointment-right-section {
@@ -156,23 +172,20 @@ body {
     }
 
 /* Time Input Fields */
-.appointment-time-row {
+.appointment-time-inputs {
     display: flex;
     align-items: center;
-    gap: 10px; /* Adjust spacing between elements */
+    gap: 0.5rem;
 }
 
-.appointment-time-separator {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.appointment-form-control,
-.appointment-form-select {
-    width: 60px; /* Adjust width for better alignment */
-    padding: 8px;
-}
-
+    .appointment-time-inputs input,
+    .appointment-time-inputs select {
+        width: auto;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+    }
 
 /* Submit Button */
 .appointment-right-section form button {
@@ -191,7 +204,6 @@ body {
     .appointment-right-section form button:hover {
         background-color: #d3c4d3;
     }
-
 /* Login form */
 
 /* Login Container */
