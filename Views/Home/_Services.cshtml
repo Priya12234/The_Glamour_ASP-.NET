@@ -25,13 +25,15 @@
                         {
                             var service = services[j];
                             var imagePath = Url.Content("~/images/" + service.Image);
-                            <div class="card card-custom text-decoration-none">
-                                <img src="@imagePath" class="card-img-top card-img-custom" alt="@service.Title" />
-                                <div class="card-body d-flex flex-column justify-content-between">
-                                    <h3 class="card-title">@service.Title</h3>
-                                    <p class="card-text">@service.Description</p>
+                            <a asp-controller="Home" asp-action="OurServices" class="text-decoration-none">
+                                <div class="card card-custom">
+                                    <img src="@imagePath" class="card-img-top card-img-custom" alt="@service.Title" />
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <h3 class="card-title">@service.Title</h3>
+                                        <p class="card-text">@service.Description</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         }
                     </div>
                 </div>

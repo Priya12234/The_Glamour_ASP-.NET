@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Our Services";
+
+}
+
+<body style="background-color: #D3D3D3;">
+    <div class="container-fluid p-5 position-relative">
+        <!-- Back Arrow with Bootstrap Icon -->
+        <a href="/" class="position-absolute top-0 start-0 m-3 text-decoration-none text-dark">
+            <i class="bi bi-arrow-left fs-4"></i> <!-- Bootstrap arrow-left icon -->
+        </a>
+
+        <!-- Services Container -->
+        <div class="container p-4 text-light rounded" style="width: 70%; background-color: #35262E">
+            <h2 class="text-center fw-bold mb-4">Our Services</h2>
+
+            <!-- Service List -->
+            @{
+                var services = new[]
+                {
+            new { Title = "Bridal Makeup", Description = "Enhance your beauty with our professional makeup services for your special day.", Details = new[] { "Flawless look for your special day - ₹15,000", "Full Bridal Package - ₹30,000" }, Img = "/images/Bride.jpg" },
+            new { Title = "Occasional Makeup", Description = "Enhance your beauty with expert makeup services, perfect for parties, festive celebrations, or formal gatherings.", Details = new[] { "Flawless Look for Your Event: ₹6,000" }, Img = "/images/Makeup.jpg" },
+            new { Title = "Hairstyle", Description = "Transform your look with expert hairstyling services, designed for any event.", Details = new[] { "Elegant Hairstyle for Your Event: ₹1,000" }, Img = "/images/Hairstyle1.jpg" },
+            new { Title = "Facial", Description = "Rejuvenate your skin with our professional facial services, designed to refresh and revitalize your complexion.", Details = new[] { "Basic Facial - ₹2,500", "Deep Cleanse Facial - ₹4,000" }, Img = "/images/Facial.jpg" },
+            new { Title = "Nail Art", Description = "Transform your nails into a work of art with our creative and stylish nail designs.", Details = new[] { "Basic Nail Art - ₹1,500", "Advanced Nail Art - ₹3,000" }, Img = "/images/Nail.png" },
+            new { Title = "Haircut", Description = "Refresh your look with our professional haircut services, tailored to suit your style and personality.", Details = new[] { "Basic Haircut - ₹1,500", "Advanced Haircut - ₹3,000" }, Img = "/images/Haircut.jpg" },
+            new { Title = "Spa", Description = "Relax and rejuvenate with our luxurious spa treatments, designed to pamper you and relieve stress.", Details = new[] { "Basic Spa Treatment - ₹1,500", "Full Body Spa Treatment - ₹3,000" }, Img = "/images/Spa.jpg" },
+            new { Title = "Mehndi", Description = "Adorn your hands and feet with beautiful, intricate mehndi designs, perfect for any special occasion.", Details = new[] { "Basic Mehndi - ₹1,500", "Intricate Mehndi - ₹3,000" }, Img = "/images/Mehndi.jpg" }
+            };
+
+                foreach (var service in services)
+                {
+                    <div class="d-flex align-items-center mb-4">
+                        <!-- Service Image -->
+                        <img src="@service.Img" alt="@service.Title" class="rounded me-3" style="width: 100px; height: 100px;" />
+
+                        <!-- Service Details -->
+                        <div>
+                            <h5 class="fw-bold">@service.Title:</h5>
+                            <p class="mb-1">@service.Description</p>
+                            @foreach (var detail in service.Details)
+                            {
+                                <p class="mb-1 fw-bold">@detail</p>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    if (service != services.Last())
+                    {
+                        <hr class="border-light my-3" />
+                    }
+                }
+            }
+
+            <!-- Book Appointment Button -->
+            <div class="text-center mt-4">
+                <a href="/Home/AppointmentForm" class="btn btn-secondary px-4 py-2 fw-bold">Book Appointment</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
