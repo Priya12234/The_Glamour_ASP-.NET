@@ -10,7 +10,7 @@ namespace The_Glamour.Controllers
 
             return View();
         }
-        // Action for Appointment Form
+
         public IActionResult AppointmentForm()
         {
             return View();
