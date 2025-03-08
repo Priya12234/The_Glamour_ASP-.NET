@@ -22,7 +22,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "adminpanel",
-    pattern: "AdminPanel/{action=Index}/{id?}",
-    defaults: new { controller = "AdminPanel", action = "Index" });
+    pattern: "Admin/{action=Index}/{id?}",
+    defaults: new { controller = "Admin", action = "Index" });
 
 app.Run();

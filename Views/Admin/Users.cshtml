@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // Use your admin layout file
+}
+
+<main class="content px-3 py-4 bg-light">
+    <div class="container-fluid">
+        <!-- Header Section -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold fs-4">Users</h3>
+            <a href="@Url.Action("RegisterForm", "Account")" class="btn" style="background-color: #A5909C; color: black; border: none; font-family: 'Kaisei HarunoUmi', serif;">
+                New User
+            </a>
+        </div>
+
+        <!-- Users Table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <table class="table table-bordered text-center">
+                            <thead style="background-color: #A5909C;">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Number</th>
+                                    <th>Orders</th>
+                                    <th>Appointment</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    // Static data for users
+                                    var users = new List<dynamic>
+                                {
+                                new { Id = 1, Name = "Priya Chauhan", Email = "pchauhan862@rku.ac.in", Number = "9999999999" },
+                                new { Id = 2, Name = "Priya Chauhan", Email = "pchauhan862@rku.ac.in", Number = "9999999999" },
+                                new { Id = 3, Name = "Priya Chauhan", Email = "pchauhan862@rku.ac.in", Number = "9999999999" },
+                                new { Id = 4, Name = "Priya Chauhan", Email = "pchauhan862@rku.ac.in", Number = "9999999999" },
+                                new { Id = 5, Name = "Priya Chauhan", Email = "pchauhan862@rku.ac.in", Number = "9999999999" }
+                                };
+                                }
+
+                                @if (users.Any())
+                                {
+                                    foreach (var user in users)
+                                    {
+                                        <tr>
+                                            <td>@user.Name</td>
+                                            <td>@user.Email</td>
+                                            <td>@user.Number</td>
+                                            <td>
+                                                <a href="@Url.Action("UserOrders", "Users")">
+                                                    <i class="fas fa-shopping-bag text-dark"></i> <!-- Font Awesome shopping bag icon -->
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <i class="fas fa-calendar-alt text-dark"></i> <!-- Font Awesome calendar icon -->
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-link text-danger" onclick="handleDelete(@user.Id)">
+                                                    <i class="fas fa-trash"></i> <!-- Font Awesome trash icon -->
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">No users found.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Include Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+    function handleDelete(userId) {
+        if (confirm("Are you sure you want to delete this user?")) {
+            // Simulate deletion (since we're using static data)
+            alert("User with ID " + userId + " deleted.");
+            location.reload(); // Reload the page to reflect the changes
+        }
+    }
+</script>

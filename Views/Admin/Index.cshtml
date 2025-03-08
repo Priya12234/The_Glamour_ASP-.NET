@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // Use your admin layout file
+}
+
+<main class="content px-3 py-4 bg-light">
+    <div class="container-fluid">
+        <!-- Header Section -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold fs-4">Admin Dashboard</h3>
+            <h5 class="text-muted">@DateTime.Now.ToShortDateString()</h5>
+        </div>
+
+        <!-- Today's Appointments Table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0 fw-bold">Today's Appointments</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>SR NO</th>
+                                    <th>Name</th>
+                                    <th>Service</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    // Static data for appointments
+                                    var appointments = new List<dynamic>
+                                {
+                                new { Id = 1, Name = "Radhesh", Service = "Haircut", Date = "07-03-2025", Time = "10:00 AM" },
+                                new { Id = 2, Name = "Vaibhav", Service = "Facial", Date = "19-02-2025", Time = "11:30 AM" },
+                                new { Id = 3, Name = "Nishant", Service = "Massage", Date = "19-02-2025", Time = "1:00 PM" },
+                                new { Id = 4, Name = "Jenil", Service = "Hair Color", Date = "19-02-2025", Time = "3:00 PM" }
+                                };
+
+                                    // Get today's date in the same format as the appointments data
+                                    var todayDate = DateTime.Now.ToString("dd-MM-yyyy");
+
+                                    // Filter appointments to include only today's appointments
+                                    var filteredAppointments = appointments.Where(a => a.Date == todayDate).ToList();
+                                }
+
+                                @if (filteredAppointments.Any())
+                                {
+                                    foreach (var appointment in filteredAppointments)
+                                    {
+                                        <tr>
+                                            <td>@appointment.Id</td>
+                                            <td>@appointment.Name</td>
+                                            <td>@appointment.Service</td>
+                                            <td>@appointment.Date</td>
+                                            <td>@appointment.Time</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal" data-appointment-id="@appointment.Id">
+                                                    Cancel
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#postponeModal" data-appointment-id="@appointment.Id">
+                                                    Postpone
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">No appointments for today.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancellation Modal -->
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: #D9D9D9;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelModalLabel">Appointment Cancellation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Canceling:</strong> <span id="cancelAppointmentName"></span></p>
+                    <label class="form-label">Describe:</label>
+                    <textarea class="form-control" rows="4" id="cancelReason"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn" style="background-color: #786670; color: white;" onclick="handleSendCancellation()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Postponement Modal -->
+    <div class="modal fade" id="postponeModal" tabindex="-1" role="dialog" aria-labelledby="postponeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: #D9D9D9;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postponeModalLabel">Appointment Postponement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Postponing:</strong> <span id="postponeAppointmentName"></span></p>
+                    <p><strong>Old Date:</strong> <span id="oldAppointmentDate"></span></p>
+                    <p><strong>Old Time:</strong> <span id="oldAppointmentTime"></span></p>
+                    <label class="form-label">New Date:</label>
+                    <input type="date" class="form-control" id="newDate" />
+                    <label class="form-label">New Time:</label>
+                    <div class="input-group">
+                        <input type="time" class="form-control" id="newTime" />
+                        <select class="form-control" id="newAmPm">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn" style="background-color: #786670; color: white;" onclick="handleSendPostponement()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Include jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+    // Handle Cancel button click
+    $('#cancelModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var appointmentId = button.data('appointment-id'); // Extract appointment ID
+        var appointmentName = button.closest('tr').find('td:nth-child(2)').text(); // Extract appointment name
+
+        // Update modal content
+        $('#cancelAppointmentName').text(appointmentName);
+    });
+
+    // Handle Postpone button click
+    $('#postponeModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var appointmentId = button.data('appointment-id'); // Extract appointment ID
+        var appointmentName = button.closest('tr').find('td:nth-child(2)').text(); // Extract appointment name
+        var appointmentDate = button.closest('tr').find('td:nth-child(4)').text(); // Extract appointment date
+        var appointmentTime = button.closest('tr').find('td:nth-child(5)').text(); // Extract appointment time
+
+        // Update modal content
+        $('#postponeAppointmentName').text(appointmentName);
+        $('#oldAppointmentDate').text(appointmentDate);
+        $('#oldAppointmentTime').text(appointmentTime);
+    });
+
+    // Handle Send Cancellation
+    function handleSendCancellation() {
+        var cancelReason = $('#cancelReason').val();
+        console.log('Cancellation Reason:', cancelReason);
+        $('#cancelModal').modal('hide');
+    }
+
+    // Handle Send Postponement
+    function handleSendPostponement() {
+        var newDate = $('#newDate').val();
+        var newTime = $('#newTime').val();
+        var newAmPm = $('#newAmPm').val();
+        var fullNewTime = `${newTime} ${newAmPm}`;
+        console.log('New Date:', newDate);
+        console.log('New Time:', fullNewTime);
+        $('#postponeModal').modal('hide');
+    }
+</script>

@@ -1,0 +1,43 @@
+﻿<nav class="navbar navbar-expand-lg px-4 py-3">
+    <div class="container-fluid">
+        <!-- Title -->
+        <a class="navbar-brand fw-bold fs-3" href="#">
+            Welcome Admin
+        </a>
+
+        <!-- Navbar Collapse -->
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <!-- Account Icon -->
+                    <a href="#" class="nav-icon d-flex align-items-center" data-bs-toggle="dropdown">
+                        <!-- Bootstrap Account Icon -->
+                        <i class="bi bi-person-circle fs-4 me-2"></i> <!-- Bootstrap Account Icon -->
+                        <span class="d-none d-md-inline text-dark">Account</span>
+                    </a>
+                    <!-- Dropdown Menu -->
+                    <ul class="dropdown-menu dropdown-menu-end rounded shadow-sm">
+                        <li>
+                            <a href="/profile" class="dropdown-item">
+                                <i class="lni lni-user me-2"></i> Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings" class="dropdown-item">
+                                <i class="lni lni-cog me-2"></i> Settings
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li>
+                            <a href="/logout" class="dropdown-item text-danger">
+                                <i class="lni lni-exit me-2"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
