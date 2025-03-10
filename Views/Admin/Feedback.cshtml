@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Client Feedback";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // Ensuring consistency with admin layout
+
+    var feedbacks = new List<dynamic>
+    {
+        new { Id = 1, FeedbackText = "Amazing", Date = "10-2-2024", Time = "10:30 AM", Client = "Drashti Chag" },
+        new { Id = 2, FeedbackText = "Excellent", Date = "11-2-2024", Time = "10:30 AM", Client = "Priya Chauhan" },
+        new { Id = 3, FeedbackText = "Good job", Date = "12-2-2024", Time = "10:30 AM", Client = "Priya Chauhan" },
+        new { Id = 4, FeedbackText = "Keep it up", Date = "13-2-2024", Time = "10:30 AM", Client = "Isha Tank" }
+    };
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Feedback</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        function showAlert(message) {
+            alert(message);
+        }
+        function deleteFeedback(id) {
+            alert("Delete feedback with ID: " + id);
+            // You can add AJAX request here to delete feedback from database
+        }
+    </script>
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+
+        .container-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="container-box">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Client Feedback</h4>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Feedback</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Client</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var feedback in feedbacks)
+                    {
+                        <tr>
+                            <td>@feedback.Id</td>
+                            <td>@feedback.FeedbackText</td>
+                            <td>@feedback.Date</td>
+                            <td>@feedback.Time</td>
+                            <td>@feedback.Client</td>
+                            <td>
+                                <button class="btn btn-info btn-sm" onclick="showAlert('Feedback: @feedback.FeedbackText \nClient: @feedback.Client \nDate: @feedback.Date \nTime: @feedback.Time')">
+                                    <i class="bi bi-eye"></i> View
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteFeedback(@feedback.Id)">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
