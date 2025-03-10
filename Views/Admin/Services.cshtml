@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // Ensure consistency with your admin layout
+
+    var services = new List<dynamic>
+    {
+        new { Id = 1, Name = "Bridal Makeup", Duration = "2 hrs", Price = "₹5000", Image = "/images/Bride.jpg", Available = true },
+        new { Id = 2, Name = "Occasional Makeup", Duration = "1.5 hrs", Price = "₹3000", Image = "/images/Makeup.jpg", Available = true },
+        new { Id = 3, Name = "Hairstyle", Duration = "1 hr", Price = "₹2000", Image = "/images/Hairstyle1.jpg", Available = true },
+        new { Id = 4, Name = "Facial", Duration = "1.5 hrs", Price = "₹3500", Image = "/images/Facial.jpg", Available = true },
+        new { Id = 5, Name = "Nail Art", Duration = "30 min", Price = "₹1500", Image = "/images/Nail.png", Available = true },
+        new { Id = 6, Name = "Haircut", Duration = "45 min", Price = "₹1000", Image = "/images/Haircut.jpg", Available = true },
+        new { Id = 7, Name = "Spa", Duration = "10 min", Price = "₹1200", Image = "/images/Spa.jpg", Available = true },
+        new { Id = 8, Name = "Mehndi", Duration = "38 min", Price = "₹900", Image = "/images/Mehndi.jpg", Available = true }
+    };
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Services</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+
+        .container-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+            .service-card:hover {
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            }
+
+        .service-img {
+            width: 95%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .action-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+            .action-icons i {
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+        .new-service-btn {
+            float: right;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="container-box">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4>Services</h4>
+                <button class="btn btn-secondary new-service-btn">New Service</button>
+            </div>
+
+            <div class="row mt-3">
+                @foreach (var service in services)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                        <div class="service-card">
+                            <img src="@service.Image" alt="@service.Name" class="service-img">
+                            <div class="card-body p-2">
+                                <h6 class="fw-bold">@service.Name</h6>
+                                <p class="small text-muted">@service.Duration</p>
+                                <p class="fw-bold">@service.Price</p>
+
+
+                                <div class="d-flex justify-content-center gap-2">
+                                    <!-- View Button -->
+                                    <button class="btn btn-info btn-sm">
+                                        <i class="bi bi-eye"></i> <!-- View (🔍) -->
+                                    </button>
+
+                                    <!-- Edit Button -->
+                                    <button class="btn btn-success btn-sm">
+                                        <i class="bi bi-pencil-square"></i> <!-- Edit (✏️) -->
+                                    </button>
+
+                                    <!-- Delete Button -->
+                                    <button class="btn btn-danger btn-sm" onclick="deleteService(@service.Id)">
+                                        <i class="bi bi-trash"></i> <!-- Delete (🗑️) -->
+                                    </button>
+
+                                  
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function deleteService(id) {
+            alert("Delete service with ID: " + id);
+            // You can add AJAX request here to delete the service from the database
+        }
+
+        function toggleAvailability(id) {
+            alert("Toggle availability for service ID: " + id);
+            // You can add AJAX request here to update the availability in the database
+        }
+    </script>
+</body>
+</html>

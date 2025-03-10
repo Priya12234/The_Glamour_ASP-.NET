@@ -26,5 +26,9 @@ namespace The_Glamour.Controllers
         {
             return View();
         }
+        public IActionResult Services()
+        {
+            return View();
+        }
     }
 }
