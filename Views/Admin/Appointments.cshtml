@@ -54,12 +54,22 @@
                                             <td>@appointment.Date</td>
                                             <td>@appointment.Time</td>
                                             <td>
-                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal" data-appointment-id="@appointment.Id">
+                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelAppointmentModal"
+                                                        data-appointment-id="@appointment.Id"
+                                                        data-appointment-name="@appointment.Name"
+                                                        data-appointment-service="@appointment.Service"
+                                                        data-appointment-date="@appointment.Date"
+                                                        data-appointment-time="@appointment.Time">
                                                     Cancel
                                                 </button>
                                             </td>
                                             <td>
-                                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#postponeModal" data-appointment-id="@appointment.Id">
+                                                <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#postponeAppointmentModal"
+                                                        data-appointment-id="@appointment.Id"
+                                                        data-appointment-name="@appointment.Name"
+                                                        data-appointment-service="@appointment.Service"
+                                                        data-appointment-date="@appointment.Date"
+                                                        data-appointment-time="@appointment.Time">
                                                     Postpone
                                                 </button>
                                             </td>
@@ -80,108 +90,158 @@
         </div>
     </div>
 
-    <!-- Cancellation Modal -->
-    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background-color: #D9D9D9;">
+    <!-- Appointment Cancellation Modal -->
+    <div class="modal fade" id="cancelAppointmentModal" tabindex="-1" aria-labelledby="cancelAppointmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cancelModalLabel">Appointment Cancellation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="cancelAppointmentModalLabel">Cancel Appointment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Canceling:</strong> <span id="cancelAppointmentName"></span></p>
-                    <label class="form-label">Describe:</label>
+                    <p><strong>Appointment Details:</strong></p>
+                    <p><strong>Name:</strong> <span id="modalAppointmentName"></span></p>
+                    <p><strong>Service:</strong> <span id="modalAppointmentService"></span></p>
+                    <p><strong>Date:</strong> <span id="modalAppointmentDate"></span></p>
+                    <p><strong>Time:</strong> <span id="modalAppointmentTime"></span></p>
+                    <label class="form-label">Reason for Cancellation:</label>
                     <textarea class="form-control" rows="4" id="cancelReason"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn" style="background-color: #786670; color: white;" onclick="handleSendCancellation()">Send</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="handleSendCancellation()">Confirm Cancellation</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Postponement Modal -->
-    <div class="modal fade" id="postponeModal" tabindex="-1" role="dialog" aria-labelledby="postponeModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background-color: #D9D9D9;">
+    <!-- Appointment Postponement Modal -->
+    <div class="modal fade" id="postponeAppointmentModal" tabindex="-1" aria-labelledby="postponeAppointmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="postponeModalLabel">Appointment Postponement</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="postponeAppointmentModalLabel">Postpone Appointment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Postponing:</strong> <span id="postponeAppointmentName"></span></p>
-                    <p><strong>Old Date:</strong> <span id="oldAppointmentDate"></span></p>
-                    <p><strong>Old Time:</strong> <span id="oldAppointmentTime"></span></p>
+                    <p><strong>Appointment Details:</strong></p>
+                    <p><strong>Name:</strong> <span id="modalPostponeAppointmentName"></span></p>
+                    <p><strong>Service:</strong> <span id="modalPostponeAppointmentService"></span></p>
+                    <p><strong>Current Date:</strong> <span id="modalPostponeAppointmentDate"></span></p>
+                    <p><strong>Current Time:</strong> <span id="modalPostponeAppointmentTime"></span></p>
                     <label class="form-label">New Date:</label>
-                    <input type="date" class="form-control" id="newDate" />
+                    <input type="date" class="form-control" id="newPostponeDate" />
                     <label class="form-label">New Time:</label>
-                    <div class="input-group">
-                        <input type="time" class="form-control" id="newTime" />
-                        <select class="form-control" id="newAmPm">
-                            <option value="AM">AM</option>
-                            <option value="PM">PM</option>
-                        </select>
-                    </div>
+                    <input type="time" class="form-control" id="newPostponeTime" />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn" style="background-color: #786670; color: white;" onclick="handleSendPostponement()">Send</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" onclick="handleSendPostponement()">Confirm Postponement</button>
                 </div>
             </div>
         </div>
     </div>
 </main>
 
-<!-- Include jQuery and Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- Include Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Your custom script -->
 <script>
-    // Handle Cancel button click
-    $('#cancelModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var appointmentId = button.data('appointment-id'); // Extract appointment ID
-        var appointmentName = button.closest('tr').find('td:nth-child(2)').text(); // Extract appointment name
+    document.addEventListener("DOMContentLoaded", function () {
+        // Handle Cancel Modal
+        var cancelAppointmentModal = document.getElementById("cancelAppointmentModal");
+        cancelAppointmentModal.addEventListener("show.bs.modal", function (event) {
+            var button = event.relatedTarget; // Button that triggered the modal
+            var appointmentId = button.getAttribute("data-appointment-id");
+            var appointmentName = button.getAttribute("data-appointment-name");
+            var appointmentService = button.getAttribute("data-appointment-service");
+            var appointmentDate = button.getAttribute("data-appointment-date");
+            var appointmentTime = button.getAttribute("data-appointment-time");
 
-        // Update modal content
-        $('#cancelAppointmentName').text(appointmentName);
+            // Update modal content
+            document.getElementById("modalAppointmentName").textContent = appointmentName;
+            document.getElementById("modalAppointmentService").textContent = appointmentService;
+            document.getElementById("modalAppointmentDate").textContent = appointmentDate;
+            document.getElementById("modalAppointmentTime").textContent = appointmentTime;
+        });
+
+        // Handle Postpone Modal
+        var postponeAppointmentModal = document.getElementById("postponeAppointmentModal");
+        postponeAppointmentModal.addEventListener("show.bs.modal", function (event) {
+            var button = event.relatedTarget; // Button that triggered the modal
+            var appointmentId = button.getAttribute("data-appointment-id");
+            var appointmentName = button.getAttribute("data-appointment-name");
+            var appointmentService = button.getAttribute("data-appointment-service");
+            var appointmentDate = button.getAttribute("data-appointment-date");
+            var appointmentTime = button.getAttribute("data-appointment-time");
+
+            // Update modal content
+            document.getElementById("modalPostponeAppointmentName").textContent = appointmentName;
+            document.getElementById("modalPostponeAppointmentService").textContent = appointmentService;
+            document.getElementById("modalPostponeAppointmentDate").textContent = appointmentDate;
+            document.getElementById("modalPostponeAppointmentTime").textContent = appointmentTime;
+        });
     });
 
-    // Handle Postpone button click
-    $('#postponeModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var appointmentId = button.data('appointment-id'); // Extract appointment ID
-        var appointmentName = button.closest('tr').find('td:nth-child(2)').text(); // Extract appointment name
-        var appointmentDate = button.closest('tr').find('td:nth-child(4)').text(); // Extract appointment date
-        var appointmentTime = button.closest('tr').find('td:nth-child(5)').text(); // Extract appointment time
-
-        // Update modal content
-        $('#postponeAppointmentName').text(appointmentName);
-        $('#oldAppointmentDate').text(appointmentDate);
-        $('#oldAppointmentTime').text(appointmentTime);
-    });
-
-    // Handle Send Cancellation
+    // Function to handle the send cancellation action
     function handleSendCancellation() {
-        var cancelReason = $('#cancelReason').val();
-        console.log('Cancellation Reason:', cancelReason);
-        $('#cancelModal').modal('hide');
+        var cancelReason = document.getElementById("cancelReason").value;
+        if (!cancelReason) {
+            alert("Please provide a reason for cancellation.");
+            return;
+        }
+        console.log("Cancellation Reason:", cancelReason);
+
+        // Here you can add an AJAX call to send the cancellation reason to the server
+        // Example:
+        // $.ajax({
+        //     url: '/Appointments/Cancel',
+        //     method: 'POST',
+        //     data: { id: appointmentId, reason: cancelReason },
+        //     success: function(response) {
+        //         console.log('Cancellation successful');
+        //         $('#cancelAppointmentModal').modal('hide');
+        //     },
+        //     error: function(error) {
+        //         console.error('Cancellation failed', error);
+        //     }
+        // });
+
+        // Close the modal after sending
+        var modal = bootstrap.Modal.getInstance(document.getElementById("cancelAppointmentModal"));
+        modal.hide();
     }
 
-    // Handle Send Postponement
+    // Function to handle the send postponement action
     function handleSendPostponement() {
-        var newDate = $('#newDate').val();
-        var newTime = $('#newTime').val();
-        var newAmPm = $('#newAmPm').val();
-        var fullNewTime = `${newTime} ${newAmPm}`;
-        console.log('New Date:', newDate);
-        console.log('New Time:', fullNewTime);
-        $('#postponeModal').modal('hide');
+        var newDate = document.getElementById("newPostponeDate").value;
+        var newTime = document.getElementById("newPostponeTime").value;
+
+        if (!newDate || !newTime) {
+            alert("Please provide a new date and time.");
+            return;
+        }
+        console.log("New Date:", newDate);
+        console.log("New Time:", newTime);
+
+        // Here you can add an AJAX call to send the new date and time to the server
+        // Example:
+        // $.ajax({
+        //     url: '/Appointments/Postpone',
+        //     method: 'POST',
+        //     data: { id: appointmentId, newDate: newDate, newTime: newTime },
+        //     success: function(response) {
+        //         console.log('Postponement successful');
+        //         $('#postponeAppointmentModal').modal('hide');
+        //     },
+        //     error: function(error) {
+        //         console.error('Postponement failed', error);
+        //     }
+        // });
+
+        // Close the modal after sending
+        var modal = bootstrap.Modal.getInstance(document.getElementById("postponeAppointmentModal"));
+        modal.hide();
     }
 </script>
