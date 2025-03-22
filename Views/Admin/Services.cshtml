@@ -24,6 +24,7 @@
     <style>
         body {
             background: #f8f9fa;
+            font-family: 'Kaisei HarunoUmi', serif;
         }
 
         .container-box {
@@ -68,6 +69,30 @@
         .new-service-btn {
             float: right;
             margin-bottom: 15px;
+            background-color: #A5909C;
+            color: black;
+            border: none;
+            font-family: 'Kaisei HarunoUmi', serif;
+        }
+
+        .modal-content {
+            font-family: 'Kaisei HarunoUmi', serif;
+        }
+
+        .modal-header {
+            background-color: #A5909C;
+            color: black;
+        }
+
+        .modal-footer .btn {
+            background-color: #A5909C;
+            color: black;
+            border: none;
+        }
+
+        .modal-footer .btn-secondary {
+            background-color: #6c757d;
+            color: white;
         }
     </style>
 </head>
@@ -76,7 +101,7 @@
         <div class="container-box">
             <div class="d-flex justify-content-between align-items-center">
                 <h4>Services</h4>
-                <button class="btn btn-secondary new-service-btn" data-bs-toggle="modal" data-bs-target="#addServiceModal">New Service</button>
+                <button class="btn new-service-btn" data-bs-toggle="modal" data-bs-target="#addServiceModal">New Service</button>
             </div>
 
             <div class="row mt-3">
@@ -137,8 +162,8 @@
                             <input type="text" class="form-control" id="servicePrice" required>
                         </div>
                         <div class="mb-3">
-                            <label for="serviceImage" class="form-label">Image URL</label>
-                            <input type="text" class="form-control" id="serviceImage" required>
+                            <label for="serviceImage" class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" id="serviceImage" accept="image/*" required>
                         </div>
                         <div class="mb-3">
                             <label for="serviceAvailability" class="form-label">Availability</label>
@@ -151,7 +176,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="addService()">Save</button>
+                    <button type="button" class="btn" onclick="addService()">Save</button>
                 </div>
             </div>
         </div>
@@ -204,8 +229,8 @@
                             <input type="text" class="form-control" id="editServicePrice" required>
                         </div>
                         <div class="mb-3">
-                            <label for="editServiceImage" class="form-label">Image URL</label>
-                            <input type="text" class="form-control" id="editServiceImage" required>
+                            <label for="editServiceImage" class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" id="editServiceImage" accept="image/*">
                         </div>
                         <div class="mb-3">
                             <label for="editServiceAvailability" class="form-label">Availability</label>
@@ -218,7 +243,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="saveEditedService()">Save Changes</button>
+                    <button type="button" class="btn" onclick="saveEditedService()">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -249,7 +274,6 @@
             document.getElementById("editServiceName").value = service.Name;
             document.getElementById("editServiceDuration").value = service.Duration;
             document.getElementById("editServicePrice").value = service.Price;
-            document.getElementById("editServiceImage").value = service.Image;
             document.getElementById("editServiceAvailability").value = service.Available;
         }
 
@@ -258,11 +282,16 @@
             const name = document.getElementById("serviceName").value;
             const duration = document.getElementById("serviceDuration").value;
             const price = document.getElementById("servicePrice").value;
-            const image = document.getElementById("serviceImage").value;
+            const imageFile = document.getElementById("serviceImage").files[0];
             const available = document.getElementById("serviceAvailability").value === "true";
 
+            // Handle the uploaded image file (e.g., upload to server)
+            if (imageFile) {
+                console.log("Image File:", imageFile);
+            }
+
             // Add logic to save the new service (e.g., send to server)
-            console.log("New Service Added:", { name, duration, price, image, available });
+            console.log("New Service Added:", { name, duration, price, imageFile, available });
 
             // Close the modal
             const modal = bootstrap.Modal.getInstance(document.getElementById("addServiceModal"));
@@ -274,11 +303,16 @@
             const name = document.getElementById("editServiceName").value;
             const duration = document.getElementById("editServiceDuration").value;
             const price = document.getElementById("editServicePrice").value;
-            const image = document.getElementById("editServiceImage").value;
+            const imageFile = document.getElementById("editServiceImage").files[0];
             const available = document.getElementById("editServiceAvailability").value === "true";
 
+            // Handle the uploaded image file (e.g., upload to server)
+            if (imageFile) {
+                console.log("Updated Image File:", imageFile);
+            }
+
             // Add logic to save the edited service (e.g., send to server)
-            console.log("Service Edited:", { name, duration, price, image, available });
+            console.log("Service Edited:", { name, duration, price, imageFile, available });
 
             // Close the modal
             const modal = bootstrap.Modal.getInstance(document.getElementById("editServiceModal"));
