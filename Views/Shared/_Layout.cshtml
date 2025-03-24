@@ -24,7 +24,15 @@
 <body>
 
     <!-- Navbar -->
-    @await Html.PartialAsync("_Navbar")
+    @{
+        var actionsToExcludeNavbar = new List<string> { "OurServices", "AppointmentForm" ,"RegisterForm" ,"LogIn"};
+    }
+
+    @if (!actionsToExcludeNavbar.Contains(ViewContext.RouteData.Values["action"].ToString()))
+    {
+        @await Html.PartialAsync("_Navbar")
+    }
+    
     <div class="container-fluid p-0 m-0">
         @RenderBody()
     </div>
