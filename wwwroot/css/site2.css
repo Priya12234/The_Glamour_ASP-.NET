@@ -97,6 +97,7 @@ body {
     font-size: 0.9rem;
     border-left: 3px solid transparent;
     transition: all 0.3s ease;
+    text-decoration : none !important;
 }
 
     .sidebar-link:hover {
@@ -186,6 +187,10 @@ a.sidebar-link:hover {
     color: white;
     font-family: "Kaisei HarunoUmi";
     transition: margin-left 0.35s ease-in-out; /* Add transition for smooth animation */
+}
+
+.navbar-text{
+    text-decoration: none !important;
 }
 
 .navbar-collapse {
