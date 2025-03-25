@@ -1,17 +1,18 @@
 ﻿@{
     ViewBag.Title = "Services";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // Ensure consistency with your admin layout
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    <link rel="stylesheet" href="~/css/site2.css" asp-append-version="true" />
 
     var services = new List<dynamic>
     {
-        new { Id = 1, Name = "Bridal Makeup", Duration = "2 hrs", Price = "₹5000", Image = "/images/Bride.jpg", Available = true },
-        new { Id = 2, Name = "Occasional Makeup", Duration = "1.5 hrs", Price = "₹3000", Image = "/images/Makeup.jpg", Available = true },
-        new { Id = 3, Name = "Hairstyle", Duration = "1 hr", Price = "₹2000", Image = "/images/Hairstyle1.jpg", Available = true },
-        new { Id = 4, Name = "Facial", Duration = "1.5 hrs", Price = "₹3500", Image = "/images/Facial.jpg", Available = true },
-        new { Id = 5, Name = "Nail Art", Duration = "30 min", Price = "₹1500", Image = "/images/Nail.png", Available = true },
-        new { Id = 6, Name = "Haircut", Duration = "45 min", Price = "₹1000", Image = "/images/Haircut.jpg", Available = true },
-        new { Id = 7, Name = "Spa", Duration = "10 min", Price = "₹1200", Image = "/images/Spa.jpg", Available = true },
-        new { Id = 8, Name = "Mehndi", Duration = "38 min", Price = "₹900", Image = "/images/Mehndi.jpg", Available = true }
+        new { Id = 1, Name = "Bridal Makeup", Description = "Professional bridal makeup for your special day", Price = "₹5000", Image = "/images/Bride.jpg", Available = true },
+        new { Id = 2, Name = "Occasional Makeup", Description = "Makeup for special occasions and events", Price = "₹3000", Image = "/images/Makeup.jpg", Available = true },
+        new { Id = 3, Name = "Hairstyle", Description = "Elegant hairstyling for any occasion", Price = "₹2000", Image = "/images/Hairstyle1.jpg", Available = true },
+        new { Id = 4, Name = "Facial", Description = "Rejuvenating facial treatment for glowing skin", Price = "₹3500", Image = "/images/Facial.jpg", Available = true },
+        new { Id = 5, Name = "Nail Art", Description = "Creative and stylish nail designs", Price = "₹1500", Image = "/images/Nail.png", Available = true },
+        new { Id = 6, Name = "Haircut", Description = "Professional haircut and styling", Price = "₹1000", Image = "/images/Haircut.jpg", Available = true },
+        new { Id = 7, Name = "Spa", Description = "Relaxing spa treatment for complete wellness", Price = "₹1200", Image = "/images/Spa.jpg", Available = true },
+        new { Id = 8, Name = "Mehndi", Description = "Beautiful henna designs for hands and feet", Price = "₹900", Image = "/images/Mehndi.jpg", Available = true }
     };
 }
 
@@ -22,184 +23,114 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
-        body {
-            background: #f8f9fa;
-            font-family: 'Kaisei HarunoUmi', serif;
-        }
-
-        .container-box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-card {
-            text-align: center;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #fff;
-            transition: 0.3s;
-        }
-
-            .service-card:hover {
-                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-            }
-
-        .service-img {
-            width: 95%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .action-icons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-            .action-icons i {
-                font-size: 16px;
-                cursor: pointer;
-            }
-
-        .new-service-btn {
-            float: right;
-            margin-bottom: 15px;
-            background-color: #A5909C;
-            color: black;
-            border: none;
-            font-family: 'Kaisei HarunoUmi', serif;
-        }
-
-        .modal-content {
-            font-family: 'Kaisei HarunoUmi', serif;
-        }
-
-        .modal-header {
-            background-color: #A5909C;
-            color: black;
-        }
-
-        .modal-footer .btn {
-            background-color: #A5909C;
-            color: black;
-            border: none;
-        }
-
-        .modal-footer .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-        }
+        
     </style>
 </head>
-<body>
-    <div class="container mt-4">
-        <div class="container-box">
-            <div class="d-flex justify-content-between align-items-center">
-                <h4>Services</h4>
-                <button class="btn new-service-btn" data-bs-toggle="modal" data-bs-target="#addServiceModal">New Service</button>
-            </div>
+<body class="service-body">
+    <div class="container p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <!-- Added flex container -->
+            <h4 class="mb-0">Services</h4> <!-- mb-0 removes bottom margin -->
+            <button class="service-new-btn" data-bs-toggle="modal" data-bs-target="#service-add-modal">New Service</button>
+        </div>
 
-            <div class="row mt-3">
-                @foreach (var service in services)
-                {
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="service-card">
-                            <img src="@service.Image" alt="@service.Name" class="service-img">
-                            <div class="card-body p-2">
-                                <h6 class="fw-bold">@service.Name</h6>
-                                <p class="small text-muted">@service.Duration</p>
-                                <p class="fw-bold">@service.Price</p>
+        <div class="container mt-4">
+            <div class="service-container-box">
+                <div class="d-flex justify-content-between align-items-center">
+                </div>
 
-                                <div class="d-flex justify-content-center gap-2">
-                                    <!-- View Button -->
-                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewServiceModal" onclick="loadServiceDetails(@service.Id)">
-                                        <i class="bi bi-eye"></i> <!-- View (🔍) -->
-                                    </button>
+                <div class="row mt-3">
+                    @foreach (var service in services)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                            <div class="service-card">
+                                <img src="@service.Image" alt="@service.Name" class="service-img">
+                                <div class="card-body p-2">
+                                    <h6 class="fw-bold">@service.Name</h6>
+                                    <p class="small text-muted">@service.Description</p>
+                                    <p class="fw-bold">@service.Price</p>
 
-                                    <!-- Edit Button -->
-                                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editServiceModal" onclick="loadServiceDetails(@service.Id)">
-                                        <i class="bi bi-pencil-square"></i> <!-- Edit (✏️) -->
-                                    </button>
-
-                                    <!-- Delete Button -->
-                                    <button class="btn btn-danger btn-sm" onclick="deleteService(@service.Id)">
-                                        <i class="bi bi-trash"></i> <!-- Delete (🗑️) -->
-                                    </button>
+                                    <div class="service-action-icons">
+                                        <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#service-view-modal" onclick="serviceLoadDetails(@service.Id)">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#service-edit-modal" onclick="serviceLoadDetails(@service.Id)">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" onclick="serviceDelete(@service.Id)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Add New Service Modal -->
-    <div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+    <div class="modal fade" id="service-add-modal" tabindex="-1" aria-labelledby="service-add-modal-label" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addServiceModalLabel">Add New Service</h5>
+            <div class="modal-content service-modal-content">
+                <div class="modal-header service-modal-header">
+                    <h5 class="modal-title" id="service-add-modal-label">Add New Service</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="serviceName" class="form-label">Service Name</label>
-                            <input type="text" class="form-control" id="serviceName" required>
+                            <label for="service-name" class="form-label">Service Name</label>
+                            <input type="text" class="form-control" id="service-name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="serviceDuration" class="form-label">Duration</label>
-                            <input type="text" class="form-control" id="serviceDuration" required>
+                            <label for="service-description" class="form-label">Description</label>
+                            <textarea class="form-control" id="service-description" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="servicePrice" class="form-label">Price</label>
-                            <input type="text" class="form-control" id="servicePrice" required>
+                            <label for="service-price" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="service-price" required>
                         </div>
                         <div class="mb-3">
-                            <label for="serviceImage" class="form-label">Upload Image</label>
-                            <input type="file" class="form-control" id="serviceImage" accept="image/*" required>
+                            <label for="service-image" class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" id="service-image" accept="image/*" required>
                         </div>
                         <div class="mb-3">
-                            <label for="serviceAvailability" class="form-label">Availability</label>
-                            <select class="form-select" id="serviceAvailability">
+                            <label for="service-availability" class="form-label">Availability</label>
+                            <select class="form-select" id="service-availability">
                                 <option value="true">Available</option>
                                 <option value="false">Unavailable</option>
                             </select>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer service-modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn" onclick="addService()">Save</button>
+                    <button type="button" class="btn" onclick="serviceAdd()">Save</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- View Service Modal -->
-    <div class="modal fade" id="viewServiceModal" tabindex="-1" aria-labelledby="viewServiceModalLabel" aria-hidden="true">
+    <div class="modal fade" id="service-view-modal" tabindex="-1" aria-labelledby="service-view-modal-label" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="viewServiceModalLabel">Service Details</h5>
+            <div class="modal-content service-modal-content">
+                <div class="modal-header service-modal-header">
+                    <h5 class="modal-title" id="service-view-modal-label">Service Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="text-center">
-                        <img id="viewServiceImage" src="" alt="Service Image" class="service-img mb-3">
-                        <h5 id="viewServiceName" class="fw-bold"></h5>
-                        <p id="viewServiceDuration" class="small text-muted"></p>
-                        <p id="viewServicePrice" class="fw-bold"></p>
-                        <p id="viewServiceAvailability" class="text-success"></p>
+                        <img id="service-view-image" src="" alt="Service Image" class="service-img mb-3">
+                        <h5 id="service-view-name" class="fw-bold"></h5>
+                        <p id="service-view-description" class="small text-muted"></p>
+                        <p id="service-view-price" class="fw-bold"></p>
+                        <p id="service-view-availability" class="text-success"></p>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer service-modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -207,43 +138,43 @@
     </div>
 
     <!-- Edit Service Modal -->
-    <div class="modal fade" id="editServiceModal" tabindex="-1" aria-labelledby="editServiceModalLabel" aria-hidden="true">
+    <div class="modal fade" id="service-edit-modal" tabindex="-1" aria-labelledby="service-edit-modal-label" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editServiceModalLabel">Edit Service</h5>
+            <div class="modal-content service-modal-content">
+                <div class="modal-header service-modal-header">
+                    <h5 class="modal-title" id="service-edit-modal-label">Edit Service</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="editServiceName" class="form-label">Service Name</label>
-                            <input type="text" class="form-control" id="editServiceName" required>
+                            <label for="service-edit-name" class="form-label">Service Name</label>
+                            <input type="text" class="form-control" id="service-edit-name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="editServiceDuration" class="form-label">Duration</label>
-                            <input type="text" class="form-control" id="editServiceDuration" required>
+                            <label for="service-edit-description" class="form-label">Description</label>
+                            <textarea class="form-control" id="service-edit-description" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="editServicePrice" class="form-label">Price</label>
-                            <input type="text" class="form-control" id="editServicePrice" required>
+                            <label for="service-edit-price" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="service-edit-price" required>
                         </div>
                         <div class="mb-3">
-                            <label for="editServiceImage" class="form-label">Upload Image</label>
-                            <input type="file" class="form-control" id="editServiceImage" accept="image/*">
+                            <label for="service-edit-image" class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" id="service-edit-image" accept="image/*">
                         </div>
                         <div class="mb-3">
-                            <label for="editServiceAvailability" class="form-label">Availability</label>
-                            <select class="form-select" id="editServiceAvailability">
+                            <label for="service-edit-availability" class="form-label">Availability</label>
+                            <select class="form-select" id="service-edit-availability">
                                 <option value="true">Available</option>
                                 <option value="false">Unavailable</option>
                             </select>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer service-modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn" onclick="saveEditedService()">Save Changes</button>
+                    <button type="button" class="btn" onclick="serviceSaveChanges()">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -252,77 +183,70 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Function to load service details into the view modal
-        function loadServiceDetails(id) {
+        function serviceLoadDetails(id) {
             // Fetch service details by ID (mock data for demonstration)
             const service = {
                 Id: id,
                 Name: "Bridal Makeup",
-                Duration: "2 hrs",
+                Description: "Professional bridal makeup for your special day",
                 Price: "₹5000",
                 Image: "/images/Bride.jpg",
                 Available: true
             };
 
             // Populate the view modal
-            document.getElementById("viewServiceName").innerText = service.Name;
-            document.getElementById("viewServiceDuration").innerText = service.Duration;
-            document.getElementById("viewServicePrice").innerText = service.Price;
-            document.getElementById("viewServiceImage").src = service.Image;
-            document.getElementById("viewServiceAvailability").innerText = service.Available ? "Available" : "Unavailable";
+            document.getElementById("service-view-name").innerText = service.Name;
+            document.getElementById("service-view-description").innerText = service.Description;
+            document.getElementById("service-view-price").innerText = service.Price;
+            document.getElementById("service-view-image").src = service.Image;
+            document.getElementById("service-view-availability").innerText = service.Available ? "Available" : "Unavailable";
 
             // Populate the edit modal
-            document.getElementById("editServiceName").value = service.Name;
-            document.getElementById("editServiceDuration").value = service.Duration;
-            document.getElementById("editServicePrice").value = service.Price;
-            document.getElementById("editServiceAvailability").value = service.Available;
+            document.getElementById("service-edit-name").value = service.Name;
+            document.getElementById("service-edit-description").value = service.Description;
+            document.getElementById("service-edit-price").value = service.Price;
+            document.getElementById("service-edit-availability").value = service.Available;
         }
 
         // Function to add a new service
-        function addService() {
-            const name = document.getElementById("serviceName").value;
-            const duration = document.getElementById("serviceDuration").value;
-            const price = document.getElementById("servicePrice").value;
-            const imageFile = document.getElementById("serviceImage").files[0];
-            const available = document.getElementById("serviceAvailability").value === "true";
+        function serviceAdd() {
+            const name = document.getElementById("service-name").value;
+            const description = document.getElementById("service-description").value;
+            const price = document.getElementById("service-price").value;
+            const imageFile = document.getElementById("service-image").files[0];
+            const available = document.getElementById("service-availability").value === "true";
 
-            // Handle the uploaded image file (e.g., upload to server)
             if (imageFile) {
                 console.log("Image File:", imageFile);
             }
 
-            // Add logic to save the new service (e.g., send to server)
-            console.log("New Service Added:", { name, duration, price, imageFile, available });
+            console.log("New Service Added:", { name, description, price, imageFile, available });
 
-            // Close the modal
-            const modal = bootstrap.Modal.getInstance(document.getElementById("addServiceModal"));
+            const modal = bootstrap.Modal.getInstance(document.getElementById("service-add-modal"));
             modal.hide();
         }
 
         // Function to save edited service
-        function saveEditedService() {
-            const name = document.getElementById("editServiceName").value;
-            const duration = document.getElementById("editServiceDuration").value;
-            const price = document.getElementById("editServicePrice").value;
-            const imageFile = document.getElementById("editServiceImage").files[0];
-            const available = document.getElementById("editServiceAvailability").value === "true";
+        function serviceSaveChanges() {
+            const name = document.getElementById("service-edit-name").value;
+            const description = document.getElementById("service-edit-description").value;
+            const price = document.getElementById("service-edit-price").value;
+            const imageFile = document.getElementById("service-edit-image").files[0];
+            const available = document.getElementById("service-edit-availability").value === "true";
 
-            // Handle the uploaded image file (e.g., upload to server)
             if (imageFile) {
                 console.log("Updated Image File:", imageFile);
             }
 
-            // Add logic to save the edited service (e.g., send to server)
-            console.log("Service Edited:", { name, duration, price, imageFile, available });
+            console.log("Service Edited:", { name, description, price, imageFile, available });
 
-            // Close the modal
-            const modal = bootstrap.Modal.getInstance(document.getElementById("editServiceModal"));
+            const modal = bootstrap.Modal.getInstance(document.getElementById("service-edit-modal"));
             modal.hide();
         }
 
         // Function to delete a service
-        function deleteService(id) {
+        function serviceDelete(id) {
             if (confirm("Are you sure you want to delete this service?")) {
-                // Add logic to delete the service (e.g., send to server)
                 console.log("Service Deleted with ID:", id);
             }
         }
