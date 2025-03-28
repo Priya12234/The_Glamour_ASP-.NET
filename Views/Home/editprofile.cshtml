@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Edit Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid d-flex align-items-center justify-content-center" style="background-color: #E0E0E0; font-family: 'Kaisei HarunoUmi'; padding-bottom: 30px;">
+    <div class="row w-100">
+
+        <!-- Sidebar Space on Larger Screens -->
+        <div class="col-md-3 d-none d-md-block"></div>
+
+        <!-- Centered Form with Larger Width -->
+        <div class="col-12 col-md-6">
+            <!-- Title outside the form, aligned top-left -->
+            <div class="p-4 w-100">
+                <h2 class="mb-4 text-start">Edit Profile</h2>
+            </div>
+
+            <form method="post" asp-action="EditProfile" class="w-100 p-4 rounded shadow bg-white align-items-center" style="max-width: 450px;">
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Email:</label>
+                    <input type="email"
+                           name="Email"
+                           value="@(Model?.Email ?? "")"
+                           required
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Name:</label>
+                    <input type="text"
+                           name="Name"
+                           value="@(Model?.Name ?? "")"
+                           required
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Password:</label>
+                    <input type="password"
+                           name="Password"
+                           required
+                           class="form-control" />
+                </div>
+
+                <button type="submit"
+                        class="btn w-100 text-white"
+                        style="background-color: #806575; font-size: 18px; height: 50px;">
+                    Update
+                </button>
+            </form>
+        </div>
+
+        <!-- Empty Column for Right Alignment on Larger Screens -->
+        <div class="col-md-3 d-none d-md-block"></div>
+    </div>
+</div>

@@ -29,5 +29,23 @@ namespace The_Glamour.Controllers
         {
             return View();
         }
+
+
+        public IActionResult MyProfile()
+        {
+            return View();
+        }
+        public IActionResult Mycart()
+        {
+            return View();
+        }
+        public IActionResult Myappoientment()
+        {
+            return View();
+        }
+        public IActionResult editprofile()
+        {
+            return View();
+        }
     }
 }

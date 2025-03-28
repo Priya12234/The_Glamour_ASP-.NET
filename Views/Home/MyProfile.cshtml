@@ -1,5 +1,48 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "My Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";  // Ensure this path is correct
 }
+
+<style>
+    html, body, .container-fluid {
+        height: 100vh; /* Make the container take full viewport height */
+    }
+
+    .row {
+        height: 100%; /* Make row take full height */
+    }
+
+    .col-md-3 {
+        height: 100%; /* Make sidebar take full height */
+    }
+</style>
+
+<div class="container-fluid position-relative">
+    <!-- Back Button -->
+    <a href="@Url.Action("Index", "Home")" class="position-absolute" style="top: 20px; left: 20px; font-size: 24px; color: #35262E; text-decoration: none;">
+        ⬅ Back
+    </a>
+
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 text-white py-5 d-flex flex-column" style="background-color: #E0E0E0;">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("Myappoientment")">My Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("Mycart")">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("EditProfile")">Edit Profile</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Content Area -->
+        <div class="col-md-9 p-3">
+            <h2>Welcome to My Profile</h2>
+            <p>Here you can view and manage your appointments, cart, and profile.</p>
+        </div>
+    </div>
+</div>

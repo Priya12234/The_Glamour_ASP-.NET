@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "My Appointments";
+    Layout = "~/Views/Shared/_Layout.cshtml";  // Ensure this path is correct
+}
+
+<style>
+    html, body, .container-fluid {
+        height: 100vh; /* Full viewport height */
+        margin: 0;
+        padding: 0;
+    }
+
+    .row {
+        height: 100%;
+        display: flex;
+    }
+
+    .sidebar {
+        width: 250px; /* Fixed sidebar width */
+        background-color: #E0E0E0;
+        height: 100vh; /* Full height sidebar */
+        padding: 20px;
+    }
+
+    .content-area {
+        flex-grow: 1;
+        padding: 20px;
+        overflow-y: auto; /* Scroll if content is long */
+        background-color: #f8f9fa;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("Myappoientment")">My Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("Mycart")">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("EditProfile")">Edit Profile</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-md-9 content-area">
+            <h2 class="mb-4">My Appointments</h2>
+
+            @if (Model?.Appointments != null && Model.Appointments.Any()) // Check if Model and Appointments exist
+            {
+                <!-- Appointment List -->
+                @foreach (var appt in Model.Appointments)
+                {
+                    <div class="d-flex justify-content-between align-items-center bg-white p-3 mb-3 shadow-sm rounded">
+                        <div>
+                            <strong>You Booked @appt.Service Appointment</strong> <br />
+                            Date: @appt.Date @appt.Time
+                        </div>
+                        <a asp-action="CancelAppointment" asp-route-id="@appt.Id" class="btn btn-danger">Cancel</a>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-center text-muted">No appointments found.</p>
+            }
+        </div>
+    </div>
+</div>

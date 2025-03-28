@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "My Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+<div class="container-fluid p-4" style="background-color: #E0E0E0; font-family: 'Kaisei HarunoUmi';">
+    <!-- Cart Content -->
+    <div class="row justify-content-center">
+        <!-- Cart Table -->
+        <div class="col-12 col-md-10 col-lg-8">
+            <h2 class="mb-4 text-center">My Cart</h2>
+
+            @if (Model?.CartItems != null && Model.CartItems.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead style="background-color: #E0E0E0;">
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Cancel Order</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color: #E0E0E0;">
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <tr>
+                                    <td class="d-flex align-items-center">
+                                        <img src="@Url.Content(item.ImagePath ?? "~/images/default.png")"
+                                             alt="@item.Name" width="50" class="me-2 img-fluid" />
+                                        <div>@item.Name <br /> <small>@item.Size</small></div>
+                                    </td>
+                                    <td>₹@item.Price</td>
+                                    <td>
+                                        <a asp-action="UpdateQuantity" asp-route-id="@item.Id" asp-route-amount="-1" class="btn btn-outline-secondary btn-sm me-2">-</a>
+                                        @item.Quantity
+                                        <a asp-action="UpdateQuantity" asp-route-id="@item.Id" asp-route-amount="1" class="btn btn-outline-secondary btn-sm ms-2">+</a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="CancelOrder" asp-route-id="@item.Id" class="btn btn-danger btn-sm px-2">Cancel</a>
+                                    </td>
+                                    <td>₹@(item.Price * item.Quantity)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Grand Total -->
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
+                    <h4 class="mb-3 mb-md-0">Grand Total: ₹@(Model?.GetTotal() ?? 0)</h4>
+                    <a asp-action="Checkout" class="btn px-4 py-2" style="background-color: #786670; color: black; font-size: 18px;">
+                        Check Out
+                    </a>
+                </div>
+            }
+            else
+            {
+                <p class="text-center text-muted">Your cart is empty.</p>
+            }
+        </div>
+    </div>
+</div>
