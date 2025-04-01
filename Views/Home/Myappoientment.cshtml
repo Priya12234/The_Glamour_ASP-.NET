@@ -1,11 +1,11 @@
 ﻿@{
     ViewData["Title"] = "My Appointments";
-    Layout = "~/Views/Shared/_Layout.cshtml";  // Ensure this path is correct
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
     html, body, .container-fluid {
-        height: 100vh; /* Full viewport height */
+        height: 100vh;
         margin: 0;
         padding: 0;
     }
@@ -16,17 +16,37 @@
     }
 
     .sidebar {
-        width: 250px; /* Fixed sidebar width */
+        width: 250px;
         background-color: #E0E0E0;
-        height: 100vh; /* Full height sidebar */
+        height: 100vh;
         padding: 20px;
     }
 
     .content-area {
         flex-grow: 1;
         padding: 20px;
-        overflow-y: auto; /* Scroll if content is long */
+        overflow-y: auto;
         background-color: #f8f9fa;
+    }
+
+    .appointment-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .cancel-btn {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
     }
 </style>
 
@@ -36,13 +56,13 @@
         <div class="col-md-3 sidebar">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="@Url.Action("Myappoientment")">My Appointment</a>
+                    <a class="nav-link text-dark" href="#">My Appointment</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="@Url.Action("Mycart")">My Cart</a>
+                    <a class="nav-link text-dark" href="#">My Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="@Url.Action("EditProfile")">Edit Profile</a>
+                    <a class="nav-link text-dark" href="#">Edit Profile</a>
                 </li>
             </ul>
         </div>
@@ -51,24 +71,33 @@
         <div class="col-md-9 content-area">
             <h2 class="mb-4">My Appointments</h2>
 
-            @if (Model?.Appointments != null && Model.Appointments.Any()) // Check if Model and Appointments exist
+            @{
+                var appointments = new List<dynamic>
             {
-                <!-- Appointment List -->
-                @foreach (var appt in Model.Appointments)
-                {
-                    <div class="d-flex justify-content-between align-items-center bg-white p-3 mb-3 shadow-sm rounded">
-                        <div>
-                            <strong>You Booked @appt.Service Appointment</strong> <br />
-                            Date: @appt.Date @appt.Time
-                        </div>
-                        <a asp-action="CancelAppointment" asp-route-id="@appt.Id" class="btn btn-danger">Cancel</a>
-                    </div>
-                }
+            new { Id = 1, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" },
+            new { Id = 2, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" },
+            new { Id = 3, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" },
+            new { Id = 4, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" }
+            };
             }
-            else
+
+            @foreach (var appt in appointments)
             {
-                <p class="text-center text-muted">No appointments found.</p>
+                <div class="appointment-card">
+                    <div>
+                        <strong>You Booked @appt.Service Appointment</strong> <br />
+                        Date: @appt.Date @appt.Time
+                    </div>
+                    <button class="cancel-btn" onclick="cancelAppointment(@appt.Id)">Cancel</button>
+                </div>
             }
         </div>
     </div>
 </div>
+
+<script>
+    function cancelAppointment(id) {
+        alert("Appointment with ID " + id + " has been canceled.");
+        // Here you can make an AJAX request to remove the appointment from the database
+    }
+</script>
