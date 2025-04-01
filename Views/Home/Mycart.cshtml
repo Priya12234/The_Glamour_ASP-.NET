@@ -10,59 +10,151 @@
     decimal getTotal() => cartItems.Sum(item => item.Price * item.Quantity);
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Cart</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container-fluid p-4" style="background-color: #E0E0E0; font-family: 'Kaisei HarunoUmi';">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-8">
-                <h2 class="mb-4 text-center">My Cart</h2>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead style="background-color: #E0E0E0;">
+@{
+    ViewData["Title"] = "My Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";  // Ensure this path is correct
+}
+
+<style>
+    html, body, .container-fluid {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: 'Kaisei HarunoUmi', serif;
+    }
+
+    .row {
+        height: 100%;
+        display: flex;
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: #E0E0E0;
+        height: 100vh;
+        padding: 20px;
+    }
+
+    .back-btn {
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .nav-link {
+        color: black;
+        font-size: 18px;
+        padding: 10px 0;
+        text-decoration: none;
+    }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+    .content-area {
+        flex-grow: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background-color: #f4f4f4;
+    }
+
+    .appointment-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .cancel-btn {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+        .cancel-btn:hover {
+            background-color: darkred;
+        }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 sidebar">
+            <button onclick="history.back()" class="back-btn">←</button>  <!-- Back Button -->
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Edit Profile</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-md-9 content-area">
+            <h2 class="mb-4 text-center">My Cart</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead style="background-color: #E0E0E0;">
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Cancel Order</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #E0E0E0;">
+                        @foreach (var item in cartItems)
+                        {
                             <tr>
-                                <th>Item</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Cancel Order</th>
-                                <th>Total</th>
+                                <td class="d-flex align-items-center">
+                                    <img src="~/images/@item.Image" alt="@item.Name" width="50" class="me-2 img-fluid" />
+                                    <div>@item.Name <br /> <small>@item.Size</small></div>
+                                </td>
+                                <td>₹@item.Price</td>
+                                <td>
+                                    <button class="btn btn-outline-secondary btn-sm me-2">-</button>
+                                    @item.Quantity
+                                    <button class="btn btn-outline-secondary btn-sm ms-2">+</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm px-2">Cancel</button>
+                                </td>
+                                <td>₹@(item.Price * item.Quantity)</td>
                             </tr>
-                        </thead>
-                        <tbody style="background-color: #E0E0E0;">
-                            @foreach (var item in cartItems)
-                            {
-                                <tr>
-                                    <td class="d-flex align-items-center">
-                                        <img src="@item.Image" alt="@item.Name" width="50" class="me-2 img-fluid" />
-                                        <div>@item.Name <br /> <small>@item.Size</small></div>
-                                    </td>
-                                    <td>₹@item.Price</td>
-                                    <td>
-                                        <button class="btn btn-outline-secondary btn-sm me-2">-</button>
-                                        @item.Quantity
-                                        <button class="btn btn-outline-secondary btn-sm ms-2">+</button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm px-2">Cancel</button>
-                                    </td>
-                                    <td>₹@(item.Price * item.Quantity)</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
-                    <h4 class="mb-3 mb-md-0">Grand Total: ₹@getTotal()</h4>
-                    <button class="btn px-4 py-2" style="background-color: #786670; color: black; font-size: 18px;">
-                        Check Out
-                    </button>
-                </div>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
+                <h4 class="mb-3 mb-md-0">Grand Total: ₹@getTotal()</h4>
+                <button class="btn px-4 py-2" style="background-color: #786670; color: black; font-size: 18px;">
+                    Check Out
+                </button>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+<script>
+    function cancelAppointment(id) {
+        alert("Appointment with ID " + id + " has been canceled.");
+        // Here you can make an AJAX request to remove the appointment from the database
+    }
+</script>
