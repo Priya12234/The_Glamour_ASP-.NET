@@ -97,6 +97,7 @@ body {
     font-size: 0.9rem;
     border-left: 3px solid transparent;
     transition: all 0.3s ease;
+    text-decoration : none !important;
 }
 
     .sidebar-link:hover {
@@ -186,6 +187,10 @@ a.sidebar-link:hover {
     color: white;
     font-family: "Kaisei HarunoUmi";
     transition: margin-left 0.35s ease-in-out; /* Add transition for smooth animation */
+}
+
+.navbar-text{
+    text-decoration: none !important;
 }
 
 .navbar-collapse {
@@ -324,4 +329,82 @@ a.sidebar-link:hover {
         min-height: auto;
         padding: 1.2rem;
     }
+}
+
+/*services page*/
+
+.service-body {
+    background: #f8f9fa;
+    font-family: 'Kaisei HarunoUmi', serif;
+}
+
+.service-container-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-card {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    transition: 0.3s;
+}
+
+    .service-card:hover {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+.service-img {
+    width: 95%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.service-action-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+    .service-action-icons i {
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+.service-new-btn {
+    float: right;
+    margin-bottom: 15px;
+    width: 140px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #A5909C;
+    color: black;
+    border: none;
+    font-family: 'Kaisei HarunoUmi', serif;
+}
+
+.service-modal-content {
+    font-family: 'Kaisei HarunoUmi', serif;
+}
+
+.service-modal-header {
+    background-color: #A5909C;
+    color: black;
+}
+
+.service-modal-footer .btn {
+    background-color: #A5909C;
+    color: black;
+    border: none;
+}
+
+.service-modal-footer .btn-secondary {
+    background-color: #6c757d;
+    color: white;
 }

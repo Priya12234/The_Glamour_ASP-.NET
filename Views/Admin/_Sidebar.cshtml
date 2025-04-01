@@ -1,4 +1,6 @@
-﻿<aside id="sidebar" class="@(ViewBag.IsSidebarExpanded != null && ViewBag.IsSidebarExpanded ? "expand" : "")">
+﻿<link rel="stylesheet" href="~/css/site2.css" asp-append-version="true" />
+
+<aside id="sidebar" class="@(ViewBag.IsSidebarExpanded != null && ViewBag.IsSidebarExpanded ? "expand" : "")">
     <div class="d-flex">
         <button class="toggle-btn" type="button" onclick="toggleSidebar()">
             <i class="bi bi-grid"></i> @* Sidebar toggle icon *@
