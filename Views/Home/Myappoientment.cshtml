@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "My Appointments";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";  // Ensure this path is correct
 }
 
 <style>
@@ -8,6 +8,7 @@
         height: 100vh;
         margin: 0;
         padding: 0;
+        font-family: 'Kaisei HarunoUmi', serif;
     }
 
     .row {
@@ -22,11 +23,31 @@
         padding: 20px;
     }
 
+    .back-btn {
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .nav-link {
+        color: black;
+        font-size: 18px;
+        padding: 10px 0;
+        text-decoration: none;
+    }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
     .content-area {
         flex-grow: 1;
         padding: 20px;
         overflow-y: auto;
-        background-color: #f8f9fa;
+        background-color: #f4f4f4;
     }
 
     .appointment-card {
@@ -48,29 +69,32 @@
         border-radius: 3px;
         cursor: pointer;
     }
+
+        .cancel-btn:hover {
+            background-color: darkred;
+        }
 </style>
 
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3 sidebar">
+            <button onclick="history.back()" class="back-btn">←</button>  <!-- Back Button -->
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#">My Appointment</a>
+                    <a class="nav-link" href="#">My Appointment</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#">My Cart</a>
+                    <a class="nav-link" href="#">My Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#">Edit Profile</a>
+                    <a class="nav-link" href="#">Edit Profile</a>
                 </li>
             </ul>
         </div>
 
         <!-- Main Content Area -->
         <div class="col-md-9 content-area">
-            <h2 class="mb-4">My Appointments</h2>
-
             @{
                 var appointments = new List<dynamic>
             {
