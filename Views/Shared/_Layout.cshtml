@@ -25,7 +25,7 @@
 
     <!-- Navbar -->
     @{
-        var actionsToExcludeNavbar = new List<string> { "OurServices", "AppointmentForm" ,"RegisterForm" ,"LogIn"};
+        var actionsToExcludeNavbar = new List<string> { "OurServices", "AppointmentForm" ,"RegisterForm" ,"LogIn","MyProfile","Mycart","editprofile","Myappoientment"};
     }
 
     @if (!actionsToExcludeNavbar.Contains(ViewContext.RouteData.Values["action"].ToString()))

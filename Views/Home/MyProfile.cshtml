@@ -1,31 +1,85 @@
 ﻿@{
     ViewData["Title"] = "My Profile";
-    Layout = "~/Views/Shared/_Layout.cshtml";  // Ensure this path is correct
+   
 }
 
 <style>
     html, body, .container-fluid {
-        height: 100vh; /* Make the container take full viewport height */
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: 'Kaisei HarunoUmi', serif;
     }
 
     .row {
-        height: 100%; /* Make row take full height */
+        height: 100%;
+        display: flex;
     }
 
-    .col-md-3 {
-        height: 100%; /* Make sidebar take full height */
+    .sidebar {
+        width: 250px;
+        background-color: #E0E0E0;
+        height: 100vh;
+        padding: 20px;
     }
+
+    .back-btn {
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .nav-link {
+        color: black;
+        font-size: 18px;
+        padding: 10px 0;
+        text-decoration: none;
+    }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+    .content-area {
+        flex-grow: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background-color: #f4f4f4;
+    }
+
+    .appointment-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .cancel-btn {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+        .cancel-btn:hover {
+            background-color: darkred;
+        }
 </style>
 
-<div class="container-fluid position-relative">
-    <!-- Back Button -->
-    <a href="@Url.Action("Index", "Home")" class="position-absolute" style="top: 20px; left: 20px; font-size: 24px; color: #35262E; text-decoration: none;">
-        ⬅ Back
-    </a>
-
+<div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-3 text-white py-5 d-flex flex-column" style="background-color: #E0E0E0;">
+        <div class="col-md-3 sidebar">
+            <button onclick="history.back()" class="back-btn">←</button>
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="@Url.Action("Myappoientment")">My Appointment</a>
@@ -36,13 +90,40 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="@Url.Action("EditProfile")">Edit Profile</a>
                 </li>
+                
             </ul>
         </div>
 
-        <!-- Content Area -->
-        <div class="col-md-9 p-3">
-            <h2>Welcome to My Profile</h2>
-            <p>Here you can view and manage your appointments, cart, and profile.</p>
+     
+<!-- Main Content Area -->
+<div class="col-md-9 content-area">
+    @{
+        var appointments = new List<dynamic>
+    {
+    new { Id = 1, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" },
+    new { Id = 2, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" },
+    new { Id = 3, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" },
+    new { Id = 4, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" }
+    };
+    }
+
+    @foreach (var appt in appointments)
+    {
+        <div class="appointment-card">
+            <div>
+                <strong>You Booked @appt.Service Appointment</strong> <br />
+                Date: @appt.Date @appt.Time
+            </div>
+            <button class="cancel-btn" onclick="cancelAppointment(@appt.Id)">Cancel</button>
         </div>
+    }
+</div>
     </div>
 </div>
+
+<script>
+    function cancelAppointment(id) {
+        alert("Appointment with ID " + id + " has been canceled.");
+        // Here you can make an AJAX request to remove the appointment from the database
+    }
+</script>

@@ -82,16 +82,17 @@
             <button onclick="history.back()" class="back-btn">←</button>  <!-- Back Button -->
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Appointment</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">My Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Edit Profile</a>
-                </li>
-            </ul>
-        </div>
+
+                <a class="nav-link text-dark" href="@Url.Action("Myappoientment")">My Appointment</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="@Url.Action("Mycart")">My Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="@Url.Action("EditProfile")">Edit Profile</a>
+            </li>
+        </ul>
+    </div>
 
         <!-- Main Content Area -->
         <div class="col-md-9 content-area">
