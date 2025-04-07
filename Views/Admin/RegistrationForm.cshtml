@@ -1,0 +1,71 @@
+@model The_Glamour.Models.User
+
+@{
+    ViewData["Title"] = "Register User";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+<div class="container d-flex justify-content-center align-items-center vh-100 position-relative">
+    <!-- Back Arrow -->
+    <a href="/" class="register-back-arrow">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+
+    <div class="row w-100 justify-content-center">
+        <!-- Left Section: Illustration -->
+        <div class="col-md-6 d-flex justify-content-center align-items-center order-md-1 order-0">
+            <img src="/images/pana.png" alt="Salon Illustration" class="img-fluid register-illustration" />
+        </div>
+
+        <!-- Right Section: Registration Form -->
+        <div class="col-md-6 d-flex justify-content-center align-items-center order-md-2 order-1">
+            <div class="card register-card-container shadow p-4 w-100">
+                <h2 class="register-text-center">Register User</h2>
+
+                <form asp-action="Register" method="post" class="needs-validation" novalidate>
+                    @Html.AntiForgeryToken()
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control" type="email" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Name</label>
+                        <input asp-for="Name" class="form-control" required />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <input asp-for="Password" type="password" class="form-control" required />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" required />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="register-text-center">
+                        <button type="submit" class="btn register-btn-custom">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
