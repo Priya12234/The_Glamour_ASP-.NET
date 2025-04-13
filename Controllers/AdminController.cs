@@ -1,60 +1,38 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
-using The_Glamour.Models;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace The_Glamour.Controllers
 {
     public class AdminController : Controller
     {
-        private static List<User> users = new List<User>();
-
         public IActionResult Index()
         {
             return View();
         }
-
+        
         public IActionResult Appointments()
         {
             return View();
         }
 
-        [HttpGet]
         public IActionResult Users()
         {
-            return View(users);
+            return View();
         }
-
-        [HttpGet]
-        public IActionResult RegistrationForm()
+        public IActionResult Orders()
         {
-            return View("RegistrationForm", new User());
+            return View();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult RegistrationForm(User user)
+        public IActionResult Products()
         {
-            if (!ModelState.IsValid)
-            {
-                return View("RegistrationForm", user);
-            }
-
-            // Your registration logic here
-            return RedirectToAction("Users");
+            return View();
         }
-
-        [HttpPost]
-        public IActionResult DeleteUser(int id)
+        public IActionResult Services()
         {
-            var userToDelete = users.FirstOrDefault(u => u.Id == id);
-            if (userToDelete != null)
-            {
-                users.Remove(userToDelete);
-                return Ok();
-            }
-            return NotFound();
+            return View();
+        }
+        public IActionResult Feedback()
+        {
+            return View();
         }
     }
 }
