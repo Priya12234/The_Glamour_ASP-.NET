@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "All Appointments";
+    
+}
+
+
+@using System.Collections.Generic
+@{
+    List<dynamic> cartItems = new List<dynamic>
+    {
+        new { Id = 1, Name = "Foundation", Size = "100 ML", Price = 300, Quantity = 1, Image = "foundation.png" },
+        new { Id = 2, Name = "Lipstick", Size = "10 g", Price = 300, Quantity = 2, Image = "lipstick.png" },
+        new { Id = 3, Name = "EyeShadow", Size = "10 g", Price = 300, Quantity = 1, Image = "eyeshadow.png" }
+    };
+
+    decimal getTotal() => cartItems.Sum(item => item.Price * item.Quantity);
+}
+
+<style>
+    .cart-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .cart-table {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+        .cart-table th {
+            background-color: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .cart-table td {
+            padding: 12px;
+            vertical-align: middle;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+    .cart-item-img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+
+    .quantity-control {
+        display: flex;
+        align-items: center;
+    }
+
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ddd;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkout-btn {
+        background-color: #786670;
+        color: white;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 4px;
+        font-size: 18px;
+        transition: all 0.3s;
+    }
+
+        .checkout-btn:hover {
+            background-color: #5a4d56;
+            color: white;
+        }
+</style>
+
+<div class="cart-container">
+    <h2 class="mb-4">My Cart</h2>
+
+    <div class="table-responsive">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in cartItems)
+                {
+                    <tr>
+                        <td class="d-flex align-items-center">
+                            <img src="~/images/@item.Image" alt="@item.Name" class="cart-item-img" />
+                            <div>
+                                <div>@item.Name</div>
+                                <small class="text-muted">@item.Size</small>
+                            </div>
+                        </td>
+                        <td>₹@item.Price</td>
+                        <td>
+                            <div class="quantity-control">
+                                <button class="quantity-btn" onclick="updateQuantity(@item.Id, -1)">-</button>
+                                <span class="mx-2">@item.Quantity</span>
+                                <button class="quantity-btn" onclick="updateQuantity(@item.Id, 1)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="removeItem(@item.Id)">Remove</button>
+                        </td>
+                        <td>₹@(item.Price * item.Quantity)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h4>Grand Total: ₹@getTotal()</h4>
+        <button class="checkout-btn" onclick="checkout()">Check Out</button>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Appointments";
+}
+
+@{
+    var appointments = new List<dynamic>
+    {
+        new { Id = 1, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" },
+        new { Id = 2, Service = "Hair Coloring", Date = "2/1/2025", Time = "11:00am" },
+        new { Id = 3, Service = "Manicure", Date = "3/1/2025", Time = "2:00pm" },
+        new { Id = 4, Service = "Facial", Date = "4/1/2025", Time = "3:00pm" }
+    };
+}
+
+<style>
+    .appointment-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .appointment-header {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .appointment-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .appointment-info {
+        flex: 1;
+    }
+
+    .appointment-service {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .appointment-date {
+        color: #666;
+        font-size: 16px;
+    }
+
+    .cancel-btn {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+        .cancel-btn:hover {
+            background-color: #d32f2f;
+        }
+</style>
+
+<div class="appointment-container">
+    <div class="appointment-header">My Appointments</div>
+
+    @foreach (var appt in appointments)
+    {
+        <div class="appointment-card">
+            <div class="appointment-info">
+                <div class="appointment-service">@appt.Service</div>
+                <div class="appointment-date">Date: @appt.Date at @appt.Time</div>
+            </div>
+            <button class="cancel-btn">Cancel</button>
+        </div>
+    }
+</div>

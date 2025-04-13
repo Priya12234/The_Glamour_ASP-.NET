@@ -7,7 +7,6 @@ namespace The_Glamour.Controllers
     {
         public IActionResult Index()
         {
-
             return View();
         }
 
@@ -15,6 +14,7 @@ namespace The_Glamour.Controllers
         {
             return View();
         }
+
         public IActionResult LogIn()
         {
             return View();
@@ -30,22 +30,11 @@ namespace The_Glamour.Controllers
             return View();
         }
 
+        public IActionResult MyProfile(string section = "MyAppointment")
+        {
+            ViewData["ActiveSection"] = section;
+            return View(); // Always return the main MyProfile view
+        }
 
-        public IActionResult MyProfile()
-        {
-            return View();
-        }
-        public IActionResult Mycart()
-        {
-            return View();
-        }
-        public IActionResult Myappoientment()
-        {
-            return View();
-        }
-        public IActionResult editprofile()
-        {
-            return View();
-        }
     }
 }
