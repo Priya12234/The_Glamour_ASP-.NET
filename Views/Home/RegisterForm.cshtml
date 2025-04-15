@@ -21,35 +21,46 @@
         <div class="col-md-6 d-flex justify-content-center align-items-center order-md-2 order-1">
             <div class="card register-card-container shadow p-4 w-100">
                 <h2 class="register-text-center">Register Yourself</h2>
-                <form method="post" action="/Home/Register">
+                <form method="post" asp-action="RegisterForm" asp-controller="Home">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required />
+                        <input type="email" class="form-control" id="email" name="Email" required />
                     </div>
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" required />
+                        <input type="text" class="form-control" id="name" name="Name" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="number" class="form-label">Number:</label>
+                        <input type="number" min="10" class="form-control" id="num" name="Number" required />
                     </div>
 
                     <div class="mb-3">
                         <label for="password" class="form-label">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" required />
+                        <input type="password" class="form-control" id="password" name="Password" required />
                     </div>
 
                     <div class="mb-3">
                         <label for="confirm-password" class="form-label">Confirm Password:</label>
-                        <input type="password" class="form-control" id="confirm-password" name="confirmPassword" required />
+                        <input type="password" class="form-control" id="confirm-password" name="ConfirmPassword" required />
                     </div>
 
                     <div class="register-text-center">
-                        <button type="submit" class="btn register-btn-custom">Register</button>
+                        <button type="submit" class="btn btn-primary">Register</button>
                     </div>
-
-                    <p class="register-text-center mt-3">
-                        Already have an account? <a href="/Home/LogIn">LogIn</a>
-                    </p>
                 </form>
+
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-success">@ViewBag.Message</div>
+                }
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.Error</div>
+                }
+
             </div>
         </div>
     </div>

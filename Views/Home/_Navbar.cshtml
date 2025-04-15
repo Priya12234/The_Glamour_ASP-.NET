@@ -29,24 +29,32 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <!-- Profile Link -->
-                <li class="nav-item" id="profileLink" style="display: none;">
-                    <a class="nav-link" asp-controller="Home" asp-action="MyProfile">My Profile</a>
-                </li>
-                <!-- Logout Form -->
-                <li class="nav-item" id="logoutForm" style="display: none;">
-                    <form id="logoutFormElement" method="post">
-                        <button type="submit" class="nav-link btn btn-link">Logout</button>
-                    </form>
-                </li>
-                <!-- Login Link -->
-                <li class="nav-item" id="loginLink">
-                    <a class="nav-link" asp-controller="Home" asp-action="LogIn">LogIn</a>
-                </li>
-                <!-- Register Link -->
-                <li class="nav-item" id="registerLink">
-                    <a class="nav-link" asp-controller="Home" asp-action="RegisterForm">Register</a>
-                </li>
+                @{
+                    var userId = Context.Session.GetInt32("UserId");
+                    var userName = Context.Session.GetString("UserName");
+                }
+
+                @if (userId != null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="MyProfile">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <form asp-controller="Home" asp-action="Logout" method="post">
+                            <button type="submit" class="nav-link btn btn-link">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <!-- Show these when user is not logged in -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="LogIn">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="RegisterForm">Register</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>
