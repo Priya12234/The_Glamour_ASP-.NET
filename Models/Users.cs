@@ -88,7 +88,7 @@ namespace The_Glamour.Models
         }
 
         // ---------------- Get One User ----------------
-        public static Users GetById(int id)
+        public static Users? GetById(int id)  // Mark as nullable
         {
             using var conn = new NpgsqlConnection(ConnectionString);
             conn.Open();
@@ -110,7 +110,7 @@ namespace The_Glamour.Models
                 };
             }
 
-            return null;
+            return null;  // Explicitly allowed
         }
 
         // ---------------- Update ----------------

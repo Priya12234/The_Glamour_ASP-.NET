@@ -1,17 +1,22 @@
-﻿@{
-    ViewBag.Title = "Appointments";
-}
-
+﻿@using The_Glamour.Models
 @{
-    var appointments = new List<dynamic>
-    {
-        new { Id = 1, Service = "Haircut", Date = "1/1/2025", Time = "10:00am" },
-        new { Id = 2, Service = "Hair Coloring", Date = "2/1/2025", Time = "11:00am" },
-        new { Id = 3, Service = "Manicure", Date = "3/1/2025", Time = "2:00pm" },
-        new { Id = 4, Service = "Facial", Date = "4/1/2025", Time = "3:00pm" }
-    };
-}
+    ViewBag.Title = "Appointments";
+    var userId = Context.Session.GetInt32("UserId") ?? 0;
+    List<Appointments> appointments = null;
 
+    try
+    {
+        appointments = Appointments.GetByUserId(userId)?.ToList();
+    }
+    catch (InvalidOperationException ex) when (ex.Message.Contains("ConnectionString"))
+    {
+        <div class="alert alert-danger">Database connection error. Please try again later.</div>
+    }
+    catch (Exception ex)
+    {
+        <div class="alert alert-danger">Error loading appointments: @ex.Message</div>
+    }
+}
 <style>
     .appointment-container {
         max-width: 800px;
@@ -67,19 +72,40 @@
         .cancel-btn:hover {
             background-color: #d32f2f;
         }
+
+    .no-appointments {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-size: 18px;
+    }
 </style>
+
 
 <div class="appointment-container">
     <div class="appointment-header">My Appointments</div>
 
-    @foreach (var appt in appointments)
+    @if (appointments == null || !appointments.Any())  // Better for performance
     {
-        <div class="appointment-card">
-            <div class="appointment-info">
-                <div class="appointment-service">@appt.Service</div>
-                <div class="appointment-date">Date: @appt.Date at @appt.Time</div>
+        <div class="no-appointments">You don't have any appointments yet.</div>
+    }
+    else
+    {
+        @foreach (var appt in appointments)
+        {
+            <div class="appointment-card">
+                <div class="appointment-info">
+                    <div class="appointment-service">@appt.Service</div>
+                    <div class="appointment-date">
+                        Date: @appt.Date.ToString("MM/dd/yyyy") at @appt.Time.ToString(@"hh\:mm")
+                    </div>
+                    @if (!string.IsNullOrEmpty(appt.Details))
+                    {
+                        <div class="appointment-details">Details: @appt.Details</div>
+                    }
+                </div>
+                <button class="cancel-btn">Cancel</button>
             </div>
-            <button class="cancel-btn">Cancel</button>
-        </div>
+        }
     }
 </div>

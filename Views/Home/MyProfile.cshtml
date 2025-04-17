@@ -1,9 +1,8 @@
 ﻿@{
     ViewData["Title"] = "My Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var activeSection = ViewData["ActiveSection"] as string ?? "MyAppointment";
+    var activeSection = Context.Request.Query["section"].FirstOrDefault() ?? "MyAppointment";
 }
-
 <style>
     /* Main container */
     .profile-container {
@@ -69,5 +68,6 @@
                 @await Html.PartialAsync("_MyAppointment")
                 break;
         }
+
     </div>
 </div>

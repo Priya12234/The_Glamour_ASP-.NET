@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using The_Glamour.Models;
 using System.Diagnostics;
+using static System.Collections.Specialized.BitVector32;
 
 namespace The_Glamour.Controllers
 {
@@ -13,6 +14,7 @@ namespace The_Glamour.Controllers
         {
             _config = config;
             Users.ConnectionString = _config.GetConnectionString("DefaultConnection");
+            Appointments.ConnectionString = _config.GetConnectionString("DefaultConnection");
         }
 
         public IActionResult Index()
@@ -97,22 +99,29 @@ namespace The_Glamour.Controllers
         }
 
         // Example of protected action using session
-        public IActionResult MyProfile()
+        public IActionResult MyProfile(string section = "MyAppointment")
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
+            try
             {
-                return RedirectToAction("LogIn");
-            }
+                var userId = HttpContext.Session.GetInt32("UserId");
+                if (userId == null) return RedirectToAction("LogIn");
 
-            var user = Users.GetById(userId.Value);
-            if (user == null)
+                var user = Users.GetById(userId.Value);
+                if (user == null)
+                {
+                    HttpContext.Session.Clear();
+                    return RedirectToAction("LogIn");
+                }
+
+                ViewData["ActiveSection"] = section;
+                return View(user);
+            }
+            catch (Exception ex)
             {
-                HttpContext.Session.Clear();
-                return RedirectToAction("LogIn");
+                // Log error here (e.g., using ILogger)
+                return StatusCode(500, "An error occurred. Please try again.");
             }
-
-            return View(user);
         }
+
     }
 }
